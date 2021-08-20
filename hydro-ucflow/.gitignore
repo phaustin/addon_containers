@@ -1,0 +1,9 @@
+.idea
+etc
+Include
+Lib
+Scripts
+share
+__pycache__
+LICENSE
+requirements.txt

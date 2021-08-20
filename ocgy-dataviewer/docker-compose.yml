@@ -1,0 +1,25 @@
+#
+# 
+#
+version: '3.8'
+
+services:
+  ocgy_dash:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    image: phaustin/ocgy:aug07
+    container_name: ocgy_aug07
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8000 app:server
+
+networks:
+    proxy_aug07:
+      driver: bridge
+      name: proxy_aug07

@@ -1,0 +1,12 @@
+name: notebook
+channels:
+  - eoas_ubc
+  - conda-forge
+dependencies:
+  - dash
+  - python = 3.8
+  - gunicorn
+  - flask
+  - pandas
+  - conda-lock
+# conda-lock -f environment.yml -p linux-64
