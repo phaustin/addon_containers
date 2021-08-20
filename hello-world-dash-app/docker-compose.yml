@@ -1,7 +1,24 @@
-version: '3'
+#
+# 
+#
+version: '3.8'
 
 services:
-# ...   
+  # hello_world:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   image: phaustin/hello_world:aug20
+  #   labels:
+  #     - "traefik.enable=false"
+  #   container_name: hello_world
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   networks:
+  #     - proxy_aug07
+  #   working_dir: /home/jovyan/dashdir
+  #   #command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8000 app:server
+  #   command: python app.py
   box1:     
     image: containous/whoami
     container_name: box1
@@ -26,9 +43,7 @@ services:
     networks:
       - proxy_aug07
 
-
 networks:
     proxy_aug07:
       external: true
-
 
