@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+# ...   
+  traefik:
+    image: traefik:v1.7.3
+    command: --docker
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - proxy_aug07
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${PWD}/traefik/config:/etc/traefik
+    labels:
+      - "traefik.frontend.rule=Host:eoastest2.xyz;PathPrefixStrip:/traefik"
+      - "traefik.port=8080"
+    container_name: traefik
+    restart: always
+
+networks:
+    proxy_aug07:
+      driver: bridge
+      name: proxy_aug07

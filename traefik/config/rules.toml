@@ -1,0 +1,26 @@
+  [backends]
+    [backends.backend1]
+      [backends.backend1.servers.server1]
+      url = "http://box1:9077"
+
+    [backends.backend2]
+      [backends.backend2.servers.server1]
+      url = "http://box2:9088"
+
+    [backends.backend3]
+      [backends.backend3.servers.server1]
+      url = "http://hello_world:8050"
+
+  [frontends]
+    [frontends.frontend1]
+      backend = "backend1"
+      [frontends.frontend1.routes.test_1]
+      rule = "PathPrefix:/box1"
+    [frontends.frontend2]
+      backend = "backend2"
+      [frontends.frontend2.routes.test_1]
+      rule = "PathPrefixStrip:/box2"
+    [frontends.frontend3]
+      backend = "backend3"
+      [frontends.frontend3.routes.test_1]
+      rule = "PathPrefix:/hello_world"
