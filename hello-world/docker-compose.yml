@@ -4,44 +4,22 @@
 version: '3.8'
 
 services:
-  # hello_world:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile
-  #   image: phaustin/hello_world:aug20
-  #   labels:
-  #     - "traefik.enable=false"
-  #   container_name: hello_world
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock
-  #   networks:
-  #     - proxy_aug07
-  #   working_dir: /home/jovyan/dashdir
-  #   #command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8000 app:server
-  #   command: python app.py
-  box1:     
-    image: containous/whoami
-    container_name: box1
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+  hello_world:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: phaustin/hello_world:aug20
     labels:
       - "traefik.enable=false"
-    command: --port 9077
-    restart: on-failure
-    networks:
-      - proxy_aug07
-
-  box2:     
-    image: containous/whoami
-    container_name: box2
+    container_name: hello_world
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-      - "traefik.enable=false"
-    command: --port 9088
-    restart: on-failure
     networks:
       - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+    #command: python app.py
+  
 
 networks:
     proxy_aug07:

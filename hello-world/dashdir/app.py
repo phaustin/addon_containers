@@ -4,12 +4,14 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
+from flask import Flask
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-server = app.server
+server = Flask(__name__)
+app = dash.Dash(__name__,server=server,requests_pathname_prefix='/hello_world/',
+                external_stylesheets=external_stylesheets)
 
 # get the data
 url = "https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv"
@@ -63,3 +65,4 @@ app.layout = html.Div([
 
 if __name__ == '__main__':
     app.run_server(debug=True, port=8060)
+

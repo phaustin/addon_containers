@@ -9,6 +9,7 @@ dependencies:
   - dash
   - dash-core-components
   - dash-html-components
+  - flask
   - gunicorn
   - plotly
   - numpy
