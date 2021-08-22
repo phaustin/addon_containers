@@ -9,6 +9,6 @@ dependencies:
   - gunicorn
   - flask
   - pandas
-  - skimage
+  - scikit-image
   - conda-lock
 # conda-lock -f environment.yml -p linux-64
