@@ -9,10 +9,15 @@ defaultEntryPoints = ["https","http"]
 #Enable Traefik Dashboard on port 8080
 #with basic authentication method
 #phil and doitnow
+<<<<<<< HEAD
 [web]
 address = ":8080"
 [web.auth.basic]
 users = ["phil:$apr1$T1qLNvVo$jVm15GW/mDPSa/nzxCil/1"]
+=======
+[api]
+entrypoint="web"
+>>>>>>> working with nbgrader.eoastest2.xyz/trythis
 
 #Define the HTTP port 80 and
 #HTTPS port 443 EntryPoint
@@ -26,6 +31,16 @@ entryPoint = "https"
 address = ":443"
 [entryPoints.https.tls]
 
+<<<<<<< HEAD
+=======
+[entryPoints.web]
+address = ":8080"
+[entryPoints.web.aut]
+[entryPoints.web.auth.basic]
+users = ["phil:$apr1$T1qLNvVo$jVm15GW/mDPSa/nzxCil/1"]
+
+
+>>>>>>> working with nbgrader.eoastest2.xyz/trythis
 #Enable retry sending a request if the network error
 [retry]
 
@@ -40,7 +55,7 @@ exposedbydefault = false
 #Define the Letsencrypt ACME HTTP challenge
 [acme]
 email = "paustin@eoas.ubc.ca"
-storage = "acme.json"
+storage = "/etc/traefik/acme.json"
 caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
 entryPoint = "https"
 OnHostRule = true

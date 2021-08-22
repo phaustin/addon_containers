@@ -6,7 +6,7 @@ version: '3.8'
 services:
   hello_world:
     build:
-      context: .
+      context: hello_world
       dockerfile: Dockerfile
     image: phaustin/hello_world:aug20
     labels:

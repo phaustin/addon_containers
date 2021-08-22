@@ -10,7 +10,8 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 
 server = Flask(__name__)
-app = dash.Dash(__name__,server=server,requests_pathname_prefix='/hello_world/',
+app = dash.Dash(__name__,server=server,
+                requests_pathname_prefix='/trythis/',
                 external_stylesheets=external_stylesheets)
 
 # get the data
@@ -64,5 +65,5 @@ app.layout = html.Div([
 ])
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8060)
+    app.run_server(debug=True, port=8050)
 

@@ -11,6 +11,12 @@
       [backends.backend3.servers.server1]
       url = "http://hello_world:8050"
 
+    [backends.backend4]
+      [backends.backend4.servers.server1]
+      url = "http://hydro:8050"
+
+
+
   [frontends]
     [frontends.frontend1]
       backend = "backend1"
@@ -23,4 +29,9 @@
     [frontends.frontend3]
       backend = "backend3"
       [frontends.frontend3.routes.test_1]
-      rule = "PathPrefix:/hello_world"
+      rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/trythis"
+    [frontends.frontend4]
+      backend = "backend4"
+      [frontends.frontend4.routes.test_1]
+      rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/hydro"
+
