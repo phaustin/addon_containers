@@ -1,1 +1,0 @@
-FROM traefik:v1.7.30

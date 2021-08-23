@@ -41,11 +41,9 @@ def station_dict(obj):
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 server = Flask(__name__)
-app = dash.Dash(
-    server=server,
-    url_base_pathname=environ.get('JUPYTERHUB_SERVICE_PREFIX', '/'),
-    external_stylesheets=external_stylesheets
-)
+app = dash.Dash(__name__,server=server,
+                requests_pathname_prefix='/ocgy/',
+                external_stylesheets=external_stylesheets)
 
 app.layout = html.Div([
 

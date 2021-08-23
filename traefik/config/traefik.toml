@@ -48,7 +48,8 @@ exposedbydefault = false
 [acme]
 email = "paustin@eoas.ubc.ca"
 storage = "/etc/traefik/acme.json"
-caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+#caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+caServer = "https://acme-v02.api.letsencrypt.org/directory"
 entryPoint = "https"
 OnHostRule = true
   [acme.httpChallenge]

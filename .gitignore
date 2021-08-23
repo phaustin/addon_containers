@@ -1,7 +1,5 @@
 *pycache*
 *acme.json*
-<<<<<<< HEAD
-*~
-=======
-
->>>>>>> add hydro
+.ipynb_checkpoints
+*.ipynb
+__pycache__/

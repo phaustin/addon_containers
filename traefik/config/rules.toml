@@ -15,6 +15,9 @@
       [backends.backend4.servers.server1]
       url = "http://hydro:8050"
 
+    [backends.backend5]
+      [backends.backend5.servers.server1]
+      url = "http://ocgy:8050"
 
   [frontends]
     [frontends.frontend1]
@@ -33,3 +36,7 @@
       backend = "backend4"
       [frontends.frontend4.routes.test_1]
       rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/hydro"
+    [frontends.frontend5]
+      backend = "backend5"
+      [frontends.frontend5.routes.test_1]
+      rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/ocgy"
