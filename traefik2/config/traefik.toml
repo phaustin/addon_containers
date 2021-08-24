@@ -1,0 +1,41 @@
+#Traefik Global Configuration
+debug = false
+checkNewVersion = false
+logLevel = "ERROR"
+
+#Define the EntryPoint for HTTP and HTTPS
+defaultEntryPoints = ["http"]
+
+#Enable Traefik Dashboard on port 8080
+#with basic authentication method
+#phil and doitnow
+[api]
+dashboard = true
+entrypoint = "dashboard"
+
+#Define the HTTP port 80 and
+#HTTPS port 443 EntryPoint
+#Enable automatically redirect HTTP to HTTPS
+[entryPoints]
+[entryPoints.http]
+address = ":80"
+  [entryPoints.authenticate]
+  address = ":8081"
+  [entryPoints.authenticate.auth.basic]
+  users = ["phil:$apr1$T1qLNvVo$jVm15GW/mDPSa/nzxCil/1"]
+
+#Enable retry sending a request if the network error
+[retry]
+
+#Define Docker Backend Configuration
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "localhost"
+watch = true
+exposedbydefault = false
+
+[file]
+  directory = "/etc/traefik"
+  watch = true
+  
+

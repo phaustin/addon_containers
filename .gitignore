@@ -1,5 +1,9 @@
 *pycache*
+<<<<<<< HEAD
 *acme.json*
 .ipynb_checkpoints
 *.ipynb
 __pycache__/
+=======
+*~
+>>>>>>> traefik2
