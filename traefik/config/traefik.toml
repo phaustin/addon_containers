@@ -4,12 +4,14 @@ checkNewVersion = false
 logLevel = "ERROR"
 
 #Define the EntryPoint for HTTP and HTTPS
-defaultEntryPoints = ["https","http"]
+defaultEntryPoints = ["http"]
 
 #Enable Traefik Dashboard on port 8080
 #with basic authentication method
+
 [api]
-entrypoint="web"
+dashboard = true
+entrypoint = "dashboard"
 
 #Define the HTTP port 80 and
 #HTTPS port 443 EntryPoint
@@ -17,19 +19,14 @@ entrypoint="web"
 [entryPoints]
 [entryPoints.http]
 address = ":80"
-[entryPoints.http.redirect]
-entryPoint = "https"
-[entryPoints.https]
-address = ":443"
-[entryPoints.https.tls]
-
+ 
 
 
 #phil and doitnow
-[entryPoints.web]
+[entryPoints.dashboard]
 address = ":8080"
-[entryPoints.web.aut]
-[entryPoints.web.auth.basic]
+[entryPoints.dashboard.auth]
+[entryPoints.dashboard.auth.basic]
 users = ["phil:$apr1$T1qLNvVo$jVm15GW/mDPSa/nzxCil/1"]
 
 
@@ -39,7 +36,7 @@ users = ["phil:$apr1$T1qLNvVo$jVm15GW/mDPSa/nzxCil/1"]
 #Define Docker Backend Configuration
 [docker]
 endpoint = "unix:///var/run/docker.sock"
-domain = "eoastest2.xyz"
+domain = "localhost"
 watch = true
 exposedbydefault = false
 
@@ -59,3 +56,4 @@ OnHostRule = true
   directory = "/etc/traefik"
   watch = true
   
+
