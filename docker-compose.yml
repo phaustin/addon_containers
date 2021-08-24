@@ -69,6 +69,8 @@ services:
     labels:
       - "traefik.enable=false"
     container_name: ocgy
+    ports:
+      - "8050:8050"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
@@ -79,6 +81,7 @@ services:
 
 networks:
     proxy_aug07:
-      external: true
+      driver: bridge
+      name: proxy_aug07
 
 
