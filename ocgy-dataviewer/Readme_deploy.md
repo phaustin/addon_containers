@@ -1,6 +1,6 @@
-# steps to deploy changes to  https://dashboard.eoastest5.xyz/ocgy
+# steps to deploy changes to  https://dashboard.eoastest2.xyz/ocgy
 
-1. `ssh n3jov`
+1. `ssh n5jov`
 2. `cd ~/repos/addon_containers`
 3. git fetch and update main branch
    - `git fetch origin`
