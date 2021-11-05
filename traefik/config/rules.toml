@@ -1,11 +1,11 @@
-  [backends]
+[backends]
     [backends.backend1]
       [backends.backend1.servers.server1]
-      url = "http://box1:9077"
+      url = "http://drawdown:8050"
 
     [backends.backend2]
       [backends.backend2.servers.server1]
-      url = "http://box2:9088"
+      url = "http://store:8050"
 
     [backends.backend3]
       [backends.backend3.servers.server1]
@@ -15,19 +15,16 @@
       [backends.backend4.servers.server1]
       url = "http://hydro:8050"
 
-    [backends.backend5]
-      [backends.backend5.servers.server1]
-      url = "http://ocgy:8050"
 
-  [frontends]
+[frontends]
     [frontends.frontend1]
       backend = "backend1"
       [frontends.frontend1.routes.test_1]
-      rule = "PathPrefix:/box1"
+      rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/drawdown"
     [frontends.frontend2]
       backend = "backend2"
       [frontends.frontend2.routes.test_1]
-      rule = "PathPrefixStrip:/box2"
+      rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/store"
     [frontends.frontend3]
       backend = "backend3"
       [frontends.frontend3.routes.test_1]
@@ -36,7 +33,4 @@
       backend = "backend4"
       [frontends.frontend4.routes.test_1]
       rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/hydro"
-    [frontends.frontend5]
-      backend = "backend5"
-      [frontends.frontend5.routes.test_1]
-      rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/ocgy"
+

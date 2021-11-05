@@ -11,9 +11,7 @@ defaultEntryPoints = ["https","http"]
 [api]
 entrypoint="web"
 
-#Define the HTTP port 80 and
-#HTTPS port 443 EntryPoint
-#Enable automatically redirect HTTP to HTTPS
+#Define the HTTP port 80 and                                                                 #HTTPS port 443 EntryPoint                                                                   #Enable automatically redirect HTTP to HTTPS                                                                                                                                                          
 [entryPoints]
 [entryPoints.http]
 address = ":80"
@@ -21,16 +19,17 @@ address = ":80"
 entryPoint = "https"
 [entryPoints.https]
 address = ":443"
+[entryPoints.https.auth]
+[entryPoints.https.auth.basic]
+users = ["e211:$2y$05$2N25nFVO13/Xxv4JUetyou5eo2xnrZ5rUHXJF0/P59gwZUGgZUdrC"]
 [entryPoints.https.tls]
 
-
-
-#phil and doitnow
 [entryPoints.web]
 address = ":8080"
-[entryPoints.web.aut]
+[entryPoints.web.auth]
 [entryPoints.web.auth.basic]
-users = ["phil:$apr1$T1qLNvVo$jVm15GW/mDPSa/nzxCil/1"]
+users = ["e211:$2y$05$2N25nFVO13/Xxv4JUetyou5eo2xnrZ5rUHXJF0/P59gwZUGgZUdrC"]
+
 
 
 #Enable retry sending a request if the network error
@@ -39,7 +38,7 @@ users = ["phil:$apr1$T1qLNvVo$jVm15GW/mDPSa/nzxCil/1"]
 #Define Docker Backend Configuration
 [docker]
 endpoint = "unix:///var/run/docker.sock"
-domain = "eoastest2.xyz"
+domain = "eoastest5.xyz"
 watch = true
 exposedbydefault = false
 
@@ -52,8 +51,19 @@ storage = "/etc/traefik/acme.json"
 caServer = "https://acme-v02.api.letsencrypt.org/directory"
 entryPoint = "https"
 OnHostRule = true
-  [acme.httpChallenge]
-  entryPoint = "http"
+
+[[acme.domains]]
+  main = "*.eoastest5.xyz"
+  sans = ["eoastest5.xyz"]
+
+
+[acme.dnsChallenge]
+  provider = "digitalocean"
+  delayBeforeCheck = 0
+  # [acme.httpChallenge]
+  # entryPoint = "http"
+
+
 
 [file]
   directory = "/etc/traefik"
