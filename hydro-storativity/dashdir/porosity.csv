@@ -1,0 +1,4 @@
+﻿Porosity,Clay,Sand,Gravel,Jointed Rock,Sound Rock
+minimum,0.45,0.26,0.25,0.05,0.0001
+middle,0.5,0.38,0.3,0.175,0.015
+maximum,0.55,0.5,0.35,0.3,0.03
