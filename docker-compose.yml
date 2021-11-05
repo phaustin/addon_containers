@@ -2,31 +2,6 @@ version: '3'
 
 services:
 # ...   
-  box1:     
-    image: containous/whoami
-    container_name: box1
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-      - "traefik.enable=false"
-    command: --port 9077
-    restart: on-failure
-    networks:
-      - proxy_aug07
-
-  box2:     
-    image: containous/whoami
-    container_name: box2
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-      - "traefik.enable=false"
-    command: --port 9088
-    restart: on-failure
-    networks:
-      - proxy_aug07
-
-
   hello_world:
     build:
       context: hello-world
@@ -61,21 +36,37 @@ services:
     #command: python app.py
 
 
-  ocgy:
+  drawdown:
     build:
-      context: ocgy-dataviewer
+      context: hydro-drawdown
       dockerfile: Dockerfile
-    image: phaustin/ocgy:aug20
+    image: phaustin/drawdown:nov5
     labels:
       - "traefik.enable=false"
-    container_name: ocgy
+    container_name: drawdown
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
     command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
-    #command: python app.py
+
+
+  store:
+    build:
+      context: hydro-storativity
+      dockerfile: Dockerfile
+    image: phaustin/store:nov5
+    labels:
+      - "traefik.enable=false"
+    container_name: store
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+
 
 networks:
     proxy_aug07:
