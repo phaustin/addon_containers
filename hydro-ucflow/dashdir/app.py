@@ -17,9 +17,8 @@ external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 server = Flask(__name__)
 app = dash.Dash(
     server=server,
-    url_base_pathname=environ.get("JUPYTERHUB_SERVICE_PREFIX", "/"),
-    external_stylesheets=external_stylesheets,
-)
+    requests_pathname_prefix='/hydro/',
+    external_stylesheets=external_stylesheets)
 
 # initial values for dash components
 initial_h1 = 35
