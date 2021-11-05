@@ -48,7 +48,7 @@ services:
     build:
       context: hydro-ucflow
       dockerfile: Dockerfile
-    image: phaustin/hydro:aug20
+    image: phaustin/hydro:nov5
     labels:
       - "traefik.enable=false"
     container_name: hydro

@@ -4,6 +4,7 @@ channels:
   - conda-forge
 dependencies:
   - dash
+  - pip
   - plotly
   - python = 3.8
   - gunicorn
