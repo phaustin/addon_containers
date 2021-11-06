@@ -20,17 +20,17 @@
     [frontends.frontend1]
       backend = "backend1"
       [frontends.frontend1.routes.test_1]
-      rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/drawdown"
+      rule = "Host: dashboard.eoastest5.xyz;PathPrefixStrip:/drawdown"
     [frontends.frontend2]
       backend = "backend2"
       [frontends.frontend2.routes.test_1]
-      rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/store"
+      rule = "Host: dashboard.eoastest5.xyz;PathPrefixStrip:/store"
     [frontends.frontend3]
       backend = "backend3"
       [frontends.frontend3.routes.test_1]
-      rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/hello"
+      rule = "Host: dashboard.eoastest5.xyz;PathPrefixStrip:/hello"
     [frontends.frontend4]
       backend = "backend4"
       [frontends.frontend4.routes.test_1]
-      rule = "Host: dashboard.eoastest2.xyz;PathPrefixStrip:/hydro"
+      rule = "Host: dashboard.eoastest5.xyz;PathPrefixStrip:/hydro"
 
