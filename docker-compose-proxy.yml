@@ -4,7 +4,7 @@ services:
   traefik:
     environment:
       - DO_AUTH_TOKEN
-    image: "traefik:v2.5"
+    image: "traefik:v2.2"
     ports:
       - 80:80
       - 443:443
@@ -26,7 +26,7 @@ services:
       - traefik.enable=true
       - traefik.http.routers.whoami.rule=Host(`hub.eoastest.xyz`)
       - traefik.http.routers.whoami.tls=true
-      - traefik.http.routers.whoami.tls.certresolver=letsEncrypt
+      - traefik.http.routers.whoami.tls.certresolver=lets-encrypt
       - traefik.http.routers.whoami.service=whoami
       - traefik.http.services.whoami.loadbalancer.server.port=80
 
