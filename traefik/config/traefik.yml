@@ -1,0 +1,31 @@
+# /etc/traefik/traefik.yml
+
+entryPoints:
+  web:
+    address: :80
+  websecure:
+    address: :443
+
+certificatesResolvers:
+  letsEncrypt:
+    acme:
+      email: paustin@eoas.ubc.ca
+      storage: /etc/traefik/acme.json
+      dnsChallenge:
+        provider: digitalocean
+        delayBeforeCheck: 0
+
+providers:
+  docker:
+    endpoint: unix:///var/run/docker.sock
+    exposedByDefault: false
+  file:
+    directory: /etc/traefik/dynamic/
+    
+api:
+  # Dashboard
+  #
+  # Optional
+  # Default: true
+  #
+  dashboard: true

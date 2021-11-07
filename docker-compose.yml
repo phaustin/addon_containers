@@ -1,75 +1,20 @@
-version: '3'
+version: '3.7'
 
 services:
-# ...   
-  hello_world:
-    build:
-      context: hello-world
-      dockerfile: Dockerfile
-    image: phaustin/hello_world:aug20
-    labels:
-      - "traefik.enable=false"
-    container_name: hello_world
+  traefik:
+    image: traefik:v2.5
+    container_name: traefik
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${PWD}/traefik/config:/etc/traefik
     networks:
       - proxy_aug07
-    working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
-    #command: python app.py
-
-
-  hydro:
-    build:
-      context: hydro-ucflow
-      dockerfile: Dockerfile
-    image: phaustin/hydro:nov5
-    labels:
-      - "traefik.enable=false"
-    container_name: hydro
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - proxy_aug07
-    working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
-    #command: python app.py
-
-
-  drawdown:
-    build:
-      context: hydro-drawdown
-      dockerfile: Dockerfile
-    image: phaustin/drawdown:nov5
-    labels:
-      - "traefik.enable=false"
-    container_name: drawdown
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - proxy_aug07
-    working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
-
-
-  store:
-    build:
-      context: hydro-storativity
-      dockerfile: Dockerfile
-    image: phaustin/store:nov5
-    labels:
-      - "traefik.enable=false"
-    container_name: store
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - proxy_aug07
-    working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
-
 
 networks:
     proxy_aug07:
-      external: true
-
-
+      driver: bridge
+      name: proxy_aug07
