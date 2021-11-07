@@ -1,0 +1,7 @@
+# /etc/traefik/dynamic/redirect.yml
+http:
+  middlewares:
+    https_redirect:
+      redirectScheme:
+        scheme: https
+        permanent: true
