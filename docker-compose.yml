@@ -1,20 +1,28 @@
 version: '3.7'
 
 services:
-  traefik:
-    image: traefik:v2.5
-    container_name: traefik
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
+  hello_world:
+    build:
+      context: hello-world
+      dockerfile: Dockerfile
+    image: phaustin/hello_world:aug20
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.hello_world.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/hello`)
+      - traefik.http.routers.hello_world.tls=true
+      - traefik.http.routers.hello_world.tls.certresolver=lets-encrypt
+      - traefik.http.routers.hello_world.service=hello_world
+      - traefik.http.services.hello_world.loadbalancer.server.port=8050
+      - traefik.http.middlewares.hello_world.stripprefix.prefixes=/hello"
+
+    container_name: hello_world
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${PWD}/traefik/config:/etc/traefik
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
 
 networks:
     proxy_aug07:
-      driver: bridge
-      name: proxy_aug07
+      external: true
