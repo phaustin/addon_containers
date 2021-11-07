@@ -1,14 +1,20 @@
 # Dynamic Configuration
 http:
   routers:
-    dashboard:
+    api:
       rule: Host(`eoastest.xyz`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
       service: api@internal
+      entrypoints:
+        - websecure
       middlewares:
-        - auth
+        - simpleAuth
+      tls:
+        certResolver: lets-encrypt
+      
   middlewares:
-    auth:
+    simpleAuth:
       basicAuth:
         users:
-          - "test:$apr1$H6uskkkW$IgXLP6ewTrSuBkTrqE8wj/"
-          - "test2:$apr1$d9hr9HBB$4HxwgUir3HP4EsggP/QNo0"
+          - "e211:$2y$05$2N25nFVO13/Xxv4JUetyou5eo2xnrZ5rUHXJF0/P59gwZUGgZUdrC"
+
+

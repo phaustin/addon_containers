@@ -3,11 +3,17 @@
 entryPoints:
   web:
     address: :80
+    http:
+      redirections:
+        entryPoint:
+          to: websecure
+          scheme: https
+
   websecure:
     address: :443
 
 certificatesResolvers:
-  letsEncrypt:
+  lets-encrypt:
     acme:
       email: paustin@eoas.ubc.ca
       storage: /etc/traefik/acme.json
@@ -19,6 +25,7 @@ providers:
   docker:
     endpoint: unix:///var/run/docker.sock
     exposedByDefault: false
+    network: proxy_aug07
   file:
     directory: /etc/traefik/dynamic/
     
