@@ -29,6 +29,7 @@ services:
       - traefik.http.routers.whoami.tls.certresolver=lets-encrypt
       - traefik.http.routers.whoami.service=whoami
       - traefik.http.services.whoami.loadbalancer.server.port=80
+    container_name: whoami
 
 
   whoami2:
@@ -44,6 +45,7 @@ services:
       - traefik.http.routers.whomi2.tls.certresolver=lets-encrypt
       - traefik.http.routers.whomi2.service=whomi2
       - traefik.http.services.whomi2.loadbalancer.server.port=80
+    container_name: whoami2
 
 networks:
     proxy_aug07:
