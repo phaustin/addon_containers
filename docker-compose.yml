@@ -16,8 +16,6 @@ services:
       - traefik.http.routers.hello_world.middlewares=hello_world-stripprefix
       - traefik.http.middlewares.hello_world-stripprefix.stripprefix.forceSlash=true
       - traefik.http.middlewares.hello_world-stripprefix.stripprefix.prefixes=/hello
-
-
     container_name: hello_world
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -25,6 +23,83 @@ services:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
     command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+
+
+  hydro:
+    build:
+      context: hydro-ucflow
+      dockerfile: Dockerfile
+    image: phaustin/hydro:nov5
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.hydro.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/hydro`)
+      - traefik.http.routers.hydro.tls=true
+      - traefik.http.routers.hydro.tls.certresolver=lets-encrypt
+      - traefik.http.routers.hydro.service=hydro
+      - traefik.http.services.hydro.loadbalancer.server.port=8050
+      - traefik.http.routers.hydro.middlewares=hydro-stripprefix
+      - traefik.http.middlewares.hydro-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.hydro-stripprefix.stripprefix.prefixes=/hydro
+    container_name: hydro
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+    #command: python app.py
+
+
+  drawdown:
+    build:
+      context: hydro-drawdown
+      dockerfile: Dockerfile
+    image: phaustin/drawdown:nov5
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.drawdown.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/drawdown`)
+      - traefik.http.routers.drawdown.tls=true
+      - traefik.http.routers.drawdown.tls.certresolver=lets-encrypt
+      - traefik.http.routers.drawdown.service=drawdown
+      - traefik.http.services.drawdown.loadbalancer.server.port=8050
+      - traefik.http.routers.drawdown.middlewares=drawdown-stripprefix
+      - traefik.http.middlewares.drawdown-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.drawdown-stripprefix.stripprefix.prefixes=/drawdown
+    container_name: drawdown
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+
+
+  store:
+    build:
+      context: hydro-storativity
+      dockerfile: Dockerfile
+    image: phaustin/store:nov5
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.store.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/store`)
+      - traefik.http.routers.store.tls=true
+      - traefik.http.routers.store.tls.certresolver=lets-encrypt
+      - traefik.http.routers.store.service=store
+      - traefik.http.services.store.loadbalancer.server.port=8050
+      - traefik.http.routers.store.middlewares=store-stripprefix
+      - traefik.http.middlewares.store-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.store-stripprefix.stripprefix.prefixes=/store
+    container_name: store
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+
+
+
+
 
 networks:
     proxy_aug07:
