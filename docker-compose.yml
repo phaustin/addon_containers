@@ -13,7 +13,9 @@ services:
       - traefik.http.routers.hello_world.tls.certresolver=lets-encrypt
       - traefik.http.routers.hello_world.service=hello_world
       - traefik.http.services.hello_world.loadbalancer.server.port=8050
-      - traefik.http.middlewares.hello_world.stripprefix.forceSlash=true
+      - traefik.http.routers.hello_world.middlewares=hello_world-stripprefix
+      - traefik.http.middlewares.hello_world-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.hello_world-stripprefix.stripprefix.prefixes=/hello
 
 
     container_name: hello_world
