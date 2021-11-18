@@ -230,7 +230,7 @@ app.layout = html.Div(
                 ),
                 dcc.Markdown(
                     """
-            **Aquifer Thickness (m):**
+            **Confined Aquifer Thickness (m):**
         """
                 ),
                 dcc.Slider(

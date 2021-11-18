@@ -1,4 +1,4 @@
-Explore **unconfined** flow between two points (or water bodies) each with known hydraulic head for differente aquifer materials. 
+Explore **unconfined** flow between two points (or water bodies) each with known hydraulic head for different aquifer materials. 
 See "Sources" below for the origin and inspiration of this app.
 
 * Set "measured" hydraulic head at left and right sides of the 2D section with sliders h1 and h2 respectively.

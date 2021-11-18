@@ -106,7 +106,7 @@ def initialize_elevation_plot(h1, h2, K, W, L, arrow_visibility):
     )
     elevation_plot.update_xaxes(range=[0, L])
     elevation_plot.update_yaxes(range=[-4, 65])
-    elevation_plot.layout.title = "Elevation Plot"
+    elevation_plot.layout.title = "Head Plot"
 
     if "visible" in arrow_visibility:  # if the checkbox for arrows is clicked
         # quiver plot
@@ -126,7 +126,7 @@ def initialize_elevation_plot(h1, h2, K, W, L, arrow_visibility):
             v,
             arrow_scale=0.3,
             angle=np.pi / (9 * 16),
-            name="q(x)",
+            name="Q(x)",
             line_color="Teal",
         )
         elevation_plot.add_traces(data=quiver_plot.data)
@@ -177,7 +177,7 @@ def initialize_q_plot(h1, h2, K, W, L):
 
     # initialize traces using .add_trace()
     # plot q
-    q_plot.add_trace(go.Scatter(x=x, y=q, line=dict(color="MediumPurple"), name="q(x)"))
+    q_plot.add_trace(go.Scatter(x=x, y=q, line=dict(color="MediumPurple"), name="Q(x)"))
     # plot the zero line on the graph
     q_plot.add_trace(
         go.Scatter(
@@ -189,10 +189,10 @@ def initialize_q_plot(h1, h2, K, W, L):
         )
     )
 
-    q_plot.update_layout(xaxis_title="x (m)", yaxis_title="qx (m\u00B2/day)")
+    q_plot.update_layout(xaxis_title="x (m)", yaxis_title="Q(x) (m\u00B2/day)")
     q_plot.update_xaxes(range=[0, L])
     q_plot.update_yaxes(range=[-100, 100], zeroline=True, zerolinecolor="FireBrick")
-    q_plot.layout.title = "q Plot"
+    q_plot.layout.title = "Q Plot"
 
     q_plot.update_layout(margin=dict(l=100, r=150, b=50, t=50))
 
@@ -209,9 +209,13 @@ def update_elevation_plot(h1, h2, K, W, L, arrow_visibility, elevation_plot):
     elevation_plot.data[0].x = x
     elevation_plot.data[0].y = h  # update h trace
 
-    index = min(range(len(x)), key=lambda i: abs(x[i] - d))
-    elevation_plot.data[1].x = [d, d]
-    elevation_plot.data[1].y = [0, h[index]]  # update the divide trace
+    if W != 0:
+        elevation_plot.data[1].visible = True
+        index = min(range(len(x)), key=lambda i: abs(x[i] - d))
+        elevation_plot.data[1].x = [d, d]
+        elevation_plot.data[1].y = [0, h[index]]  # update the divide trace
+    else:
+        elevation_plot.data[1].visible = False
 
     elevation_plot.update_xaxes(range=[0, L])
     # update the size of the image so when we change L it looks like the background doesn't move
