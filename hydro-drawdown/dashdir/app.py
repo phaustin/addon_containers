@@ -399,14 +399,17 @@ def update_thiem_plot(Q, T, r2):
 
     h1 = h1_thiem(Q, (10 ** T), h2, rw, x)
     s = abs(h1) - abs(h1[-1])
-
-    fig = go.Figure(go.Scatter(x=x, y=s, mode="lines"))
+    
+    # y = -s because we want positive values of s but y-axis going down. 
+    fig = go.Figure(go.Scatter(x=x, y=-s, mode="lines"))
+    
     fig.update_layout(
-        title="Steady state drawdown (confined aquifer), s = h2 - h1",
+        title="Steady state drawdown (confined aquifer), s = h2 - h1<br>Y-axis is flipped to visualize drawdown",
         xaxis_title="r (m)",
         yaxis_title="drawdown, s (m)",
     )
-    fig.update_yaxes(range=[-80, 2])
+    # y-axis going down by using reversed range. Don't use autorange-"reversed" because then range can not be fixed. See Plotly docs.
+    fig.update_yaxes(range=[80, -4])    
     fig.update_xaxes(ticks="outside", range=[-0.01 * r2, r2])
     return fig
 
@@ -428,13 +431,15 @@ def update_df_plot(Q, K, r2):
     h1 = h1_df(Q, (10 ** K), h2, rw, x)
     s = abs(h1) - abs(h1[-1])
 
-    fig = go.Figure(go.Scatter(x=x, y=s, mode="lines"))
+    # y = -s because we want positive values of s but y-axis going down. 
+    fig = go.Figure(go.Scatter(x=x, y=-s, mode="lines"))
     fig.update_layout(
-        title="Steady state drawdown (unconfined aquifer), s = h2 - h1",
+        title="Steady state drawdown (unconfined aquifer), s = h2 - h1<br>Y-axis is flipped to visualize drawdown",
         xaxis_title="r (m)",
         yaxis_title="drawdown, s (m)",
     )
-    fig.update_yaxes(range=[-15, 0.5])
+    # y-axis going down by using reversed range. Don't use autorange-"reversed" because then range can not be fixed. See Plotly docs.
+    fig.update_yaxes(range=[15, -0.5])
     fig.update_xaxes(ticks="outside", range=[-0.01 * r2, r2])
     return fig
 
