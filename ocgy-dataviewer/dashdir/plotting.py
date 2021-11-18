@@ -1,3 +1,5 @@
+# This file is called by app.py. This file updates plots.
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -18,6 +20,8 @@ GIPY0405 = pd.concat(
 # SUBPLOTS PLOTTING
 def get_x_y_values(cruise, lat, lon, data_name):
     # getting the x and y values to plot the depth profile for a given parameter (data_name) at a given lat and lon
+    # We use latitude and longitude to specify the station, because originally there were duplicate station names, but there
+    # are no duplicate latitudes and longitudes.
     if cruise == "GIPY0405":
         xvals = GIPY0405[data_name][
             (GIPY0405["Latitude"] == lat) & (GIPY0405["Longitude"] == lon)
@@ -64,7 +68,9 @@ def update_x_range(fig, x_range, cruise):
     return fig
 
 
+# update the legend with station name, lat, lon, and date
 def update_legend(fig, cruise, hov_station, click_stations):
+    # Updating the legend info for the hover station
     if station.is_empty(hov_station) is False:
         fig.data[0]["showlegend"] = True
         fig.data[0]["name"] = (
@@ -73,7 +79,10 @@ def update_legend(fig, cruise, hov_station, click_stations):
             + str("{:.2f}".format(hov_station["lat"]))
             + "<br>lon: "
             + str("{:.2f}".format(hov_station["lon"]))
+            + "<br>date: "
+            + str(hov_station["date"])
         )
+    # updating legend info for clicked stations
     if len(click_stations) != 0:
         for i in range(len(click_stations)):
             fig.data[6 + 6 * i]["showlegend"] = True
@@ -84,7 +93,10 @@ def update_legend(fig, cruise, hov_station, click_stations):
                     + str("{:.2f}".format(click_stations[i]["lat"]))
                     + "<br>lon: "
                     + str("{:.2f}".format(click_stations[i]["lon"]))
+                    + "<br>date: "
+                    + str(click_stations[i]["date"])
                 )
+    # updating legend title with the cruise name
     if cruise == "GIPY0405":
         fig.update_layout(
             legend_title_text="<b>"
@@ -102,6 +114,7 @@ def update_legend(fig, cruise, hov_station, click_stations):
     return fig
 
 
+# clear (empty) traces from the legend
 def clear_click_legend(fig):
     for i in range(8):
         fig.data[6 + i * 6]["showlegend"] = False
@@ -109,14 +122,13 @@ def clear_click_legend(fig):
 
 
 def clear_hover_legend(fig):
-    for i in range(8):
-        fig.data[i * 6]["showlegend"] = False
+    fig.data[0]["showlegend"] = False
     return fig
 
 
 def clear_hover_traces(fig):
-    clear_hover_legend(fig)
-
+    clear_hover_legend(fig)  # clear empty traces from the legend
+    # set all hover data to None
     fig.data[0].update(x=[None], y=[None])
     fig.data[1].update(x=[None], y=[None])
     fig.data[2].update(x=[None], y=[None])
@@ -127,8 +139,9 @@ def clear_hover_traces(fig):
 
 
 def clear_click_traces(fig):
-    clear_click_legend(fig)
+    clear_click_legend(fig)  # clear empty traces from the legend
 
+    # loop through each station and set each parameter to None
     for i in range(8):
         fig.data[6 + i * 6].update(x=[None], y=[None])
         fig.data[7 + i * 6].update(x=[None], y=[None])
@@ -141,7 +154,7 @@ def clear_click_traces(fig):
 
 # initialize the profiles
 def initialize_profiles(cruise, x_range, y_range):
-    fig = make_subplots(
+    fig = make_subplots(  # initialize subplots with titles
         rows=1,
         cols=6,
         subplot_titles=(
@@ -150,7 +163,7 @@ def initialize_profiles(cruise, x_range, y_range):
             "<b>Sigma0*</b>",
             "<b>Nitrate</b>",
             "<b>Iron</b>",
-            "<b>Nitrate/Iron</b>",
+            "<b>Nitrate/Iron**</b>",
         ),
     )
 
@@ -170,7 +183,7 @@ def initialize_profiles(cruise, x_range, y_range):
     fig.add_trace(figR.data[0], row=1, col=6)
 
     for i in range(8):
-        # traces for clicked data
+        # empty traces for clicked data
         figT = px.scatter(x=[None], y=[None])
         figS = px.scatter(x=[None], y=[None])
         figD = px.scatter(x=[None], y=[None])
@@ -211,7 +224,9 @@ def initialize_profiles(cruise, x_range, y_range):
     return fig
 
 
+# this function is called when we switch cruises
 def switch_profiles(cruise, fig, x_range, y_range):
+    # clear all the traces
     fig = clear_hover_traces(fig)
     fig = clear_click_traces(fig)
 
@@ -224,10 +239,12 @@ def switch_profiles(cruise, fig, x_range, y_range):
     return fig
 
 
+# this function is called when any parameters are changed, to update the profiles
 def update_profiles(hov_station, click_stations, cruise, fig, x_range, y_range):
     fig = clear_hover_traces(fig)
     fig = clear_click_traces(fig)
 
+    # if there is a hover station, we find all the profile data for the hover station
     if station.is_empty(hov_station) is False:
 
         hov_xvals_temp, hov_yvals_temp = get_x_y_values(
@@ -256,9 +273,7 @@ def update_profiles(hov_station, click_stations, cruise, fig, x_range, y_range):
         fig.data[4].update(x=hov_xvals_iron, y=hov_yvals_iron)
         fig.data[5].update(x=hov_xvals_ratio, y=hov_yvals_ratio)
 
-    else:
-        fig = clear_hover_traces(fig)
-
+    # loop through each of the clicked stations and plot the traces
     if len(click_stations) != 0:
         for i in range(8):
             if i < len(click_stations):
@@ -325,14 +340,6 @@ def update_profiles(hov_station, click_stations, cruise, fig, x_range, y_range):
                     marker_color=click_stations[i]["colour"],
                 )
 
-            else:
-                fig.data[6 + i * 6].update(x=[None], y=[None])
-                fig.data[7 + i * 6].update(x=[None], y=[None])
-                fig.data[8 + i * 6].update(x=[None], y=[None])
-                fig.data[9 + i * 6].update(x=[None], y=[None])
-                fig.data[10 + i * 6].update(x=[None], y=[None])
-                fig.data[11 + i * 6].update(x=[None], y=[None])
-
     # display cruise info
     fig = update_legend(fig, cruise, hov_station, click_stations)
 
@@ -345,15 +352,18 @@ def update_profiles(hov_station, click_stations, cruise, fig, x_range, y_range):
 
 
 # MAP PLOTTING
-
-
+# function to plot the map and the stations on the map
 def plot_stations(cruise, click_stations):
+    # creating a mapbox figure
     if cruise == "GIPY0405":
+        # hover text formatting: https://plotly.com/python/hover-text-and-formatting/
         fig = px.scatter_mapbox(
             GIPY0405,
             lat="Latitude",
             lon="Longitude",
-            hover_name="Station",
+            # hover_name="Station",
+            # hover_data={"Date"},
+            custom_data=["Station", "Date"],  # custom data is used for the hovertext
             color_discrete_sequence=["blue"],
             zoom=1.2,
             center=dict(lat=-50, lon=0),
@@ -363,7 +373,7 @@ def plot_stations(cruise, click_stations):
             GA03,
             lat="Latitude",
             lon="Longitude",
-            hover_name="Station",
+            custom_data=["Station", "Date"],
             color_discrete_sequence=["blue"],
             zoom=1.2,
         )
@@ -372,13 +382,18 @@ def plot_stations(cruise, click_stations):
             GP02,
             lat="Latitude",
             lon="Longitude",
-            hover_name="Station",
+            custom_data=["Station", "Date"],
             color_discrete_sequence=["blue"],
             zoom=1.2,
         )
+    # update what the hovertext looks like on the map. customdata[0] is the station name, customdata[1] is the date.
+    fig.update_traces(
+        hovertemplate="<b>%{customdata[0]}</b><br>lat: %{lat}<br>lon: %{lon}<br>date: %{customdata[1]}"
+    )
     fig.update_layout(mapbox_style="open-street-map")
 
     # adding markers from: https://plotly.com/python/scattermapbox/
+    # the clicked stations are plotted as markers
     if len(click_stations) != 0:
         for i in range(len(click_stations)):
             fig.add_trace(
@@ -388,7 +403,9 @@ def plot_stations(cruise, click_stations):
                     showlegend=False,
                     hovertemplate="<b>"
                     + str(click_stations[i]["name"])
-                    + "</b><br><br>Latitude=%{lat} </br> Longitude=%{lon}<extra></extra>",
+                    + "</b><br>lat: %{lat}</br>lon: %{lon}</br>date: "
+                    + str(click_stations[i]["date"])
+                    + "<extra></extra>",
                     mode="markers",
                     marker=go.scattermapbox.Marker(
                         size=10, color=click_stations[i]["colour"]
@@ -399,10 +416,8 @@ def plot_stations(cruise, click_stations):
     return fig
 
 
-# figure functions
 def initialize_map(cruise):
-
-    fig = plot_stations(cruise, [])  # ***
+    fig = plot_stations(cruise, [])  # plot the map with empty clicked stations
 
     if cruise == "GIPY0405":
         fig.update_layout(
@@ -417,7 +432,7 @@ def initialize_map(cruise):
 # update map for cruise changes
 def switch_map(cruise, fig):
     fig.data = []
-    fig = plot_stations(cruise, [])
+    fig = plot_stations(cruise, [])  # plot the stations, with empty clicked stations
 
     if cruise == "GIPY0405":
         fig.update_layout(
@@ -429,9 +444,10 @@ def switch_map(cruise, fig):
     return fig
 
 
+# called when any map parameters are changed
 def update_map(click_stations, figure_data, cruise):
+    fig = plot_stations(cruise, click_stations)  # update the plotted clicked stations
 
-    fig = plot_stations(cruise, click_stations)
     if (
         figure_data is not None
     ):  # set map layout to its previous settings, so the zoom and position doesn't reset
