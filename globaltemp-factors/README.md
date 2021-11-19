@@ -1,0 +1,2 @@
+# Climate Change Graphs
+This dashboard shows the impacts of various natural and human forcings on global temperature anomaly. These graphs are based on the climate change graph [here](https://www.bloomberg.com/graphics/2015-whats-warming-the-world/). 

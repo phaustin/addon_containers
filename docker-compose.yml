@@ -143,6 +143,29 @@ services:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
     command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+
+  globaltemps:
+    build:
+      context: globaltemp-factors
+      dockerfile: Dockerfile
+    image: phaustin/globaltemps:nov19
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.globaltemps.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/globaltemps`)
+      - traefik.http.routers.globaltemps.tls=true
+      - traefik.http.routers.globaltemps.tls.certresolver=lets-encrypt
+      - traefik.http.routers.globaltemps.service=globaltemps
+      - traefik.http.services.globaltemps.loadbalancer.server.port=8050
+      - traefik.http.routers.globaltemps.middlewares=globaltemps-stripprefix
+      - traefik.http.middlewares.globaltemps-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.globaltemps-stripprefix.stripprefix.prefixes=/globaltemps
+    container_name: globaltemps
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
     
 
 networks:
