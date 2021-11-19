@@ -98,6 +98,28 @@ services:
     command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
 
 
+  daisy:
+    build:
+      context: daisy-world
+      dockerfile: Dockerfile
+    image: phaustin/daisy:nov19
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.store.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/daisy`)
+      - traefik.http.routers.store.tls=true
+      - traefik.http.routers.store.tls.certresolver=lets-encrypt
+      - traefik.http.routers.store.service=store
+      - traefik.http.services.store.loadbalancer.server.port=8050
+      - traefik.http.routers.store.middlewares=store-stripprefix
+      - traefik.http.middlewares.store-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.store-stripprefix.stripprefix.prefixes=/daisy
+    container_name: daisy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
 
 
 
