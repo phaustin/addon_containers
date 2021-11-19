@@ -121,6 +121,29 @@ services:
     working_dir: /home/jovyan/dashdir
     command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
 
+  ocgy:
+    build:
+      context: ocgy-dataviewer
+      dockerfile: Dockerfile
+    image: phaustin/ocgy:nov19
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ocgy.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/ocgy`)
+      - traefik.http.routers.ocgy.tls=true
+      - traefik.http.routers.ocgy.tls.certresolver=lets-encrypt
+      - traefik.http.routers.ocgy.service=ocgy
+      - traefik.http.services.ocgy.loadbalancer.server.port=8050
+      - traefik.http.routers.ocgy.middlewares=ocgy-stripprefix
+      - traefik.http.middlewares.ocgy-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.ocgy-stripprefix.stripprefix.prefixes=/ocgy
+    container_name: ocgy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+    
 
 networks:
     proxy_aug07:
