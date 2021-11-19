@@ -29,6 +29,7 @@ providers:
     endpoint: unix:///var/run/docker.sock
     exposedByDefault: false
     network: proxy_aug07
+    watch: true
   file:
     directory: /etc/traefik/dynamic/
     
