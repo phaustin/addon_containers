@@ -22,7 +22,7 @@ services:
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
 
 
   hydro:
@@ -46,7 +46,7 @@ services:
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
     #command: python app.py
 
 
@@ -71,7 +71,7 @@ services:
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
 
 
   store:
@@ -95,7 +95,7 @@ services:
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
 
 
   daisy:
@@ -119,7 +119,7 @@ services:
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
 
   ocgy:
     build:
@@ -142,7 +142,7 @@ services:
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=5 -b 0.0.0.0:8050 app:server
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
 
   globaltemps:
     build:
@@ -165,7 +165,7 @@ services:
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
     
 
 networks:
