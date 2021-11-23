@@ -29,7 +29,7 @@ services:
     build:
       context: hydro-ucflow
       dockerfile: Dockerfile
-    image: phaustin/hydro:nov5
+    image: phaustin/hydro:nov23
     labels:
       - traefik.enable=true
       - traefik.http.routers.hydro.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/hydro`)
@@ -54,7 +54,7 @@ services:
     build:
       context: hydro-drawdown
       dockerfile: Dockerfile
-    image: phaustin/drawdown:nov5
+    image: phaustin/drawdown:nov23
     labels:
       - traefik.enable=true
       - traefik.http.routers.drawdown.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/drawdown`)
@@ -78,7 +78,7 @@ services:
     build:
       context: hydro-storativity
       dockerfile: Dockerfile
-    image: phaustin/store:nov5
+    image: phaustin/store:nov23
     labels:
       - traefik.enable=true
       - traefik.http.routers.store.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/store`)
