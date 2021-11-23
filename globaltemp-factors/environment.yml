@@ -8,6 +8,7 @@ dependencies:
   - python = 3.8
   - gunicorn
   - flask
+  - pip
   - pandas
   - scikit-image
   - conda-lock
