@@ -190,6 +190,29 @@ services:
     working_dir: /home/jovyan/dashdir
     command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
 
+  timeseries:
+    build:
+      context: timeseries
+      dockerfile: Dockerfile
+    image: phaustin/timeseries:jan28
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.timeseries.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/timeseries`)
+      - traefik.http.routers.timeseries.tls=true
+      - traefik.http.routers.timeseries.tls.certresolver=lets-encrypt
+      - traefik.http.routers.timeseries.service=timeseries
+      - traefik.http.services.timeseries.loadbalancer.server.port=8050
+      - traefik.http.routers.timeseries.middlewares=timeseries-stripprefix
+      - traefik.http.middlewares.timeseries-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.timeseries-stripprefix.stripprefix.prefixes=/timeseries
+    container_name: timeseries
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+
 networks:
     proxy_aug07:
       external: true
