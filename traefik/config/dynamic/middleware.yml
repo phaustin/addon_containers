@@ -5,10 +5,6 @@ http:
           regex: (^.*\/dashboard$)
           replacement: "${1}/"
           permanent: false
-    cmip6_book-stripprefix:
-      stripprefix:
-        prefixes:
-          - "/cmip6"
     strip-prefix-start:
       redirectregex:
         regex:
@@ -21,14 +17,21 @@ http:
       stripprefixregex:
         regex:
           - "/[a-z0-9_]+"
-    chain-strip:
-      chain:
-        middlewares:
-          - strip-prefix-start
-          - strip-prefix-end
-          - cmip6_book-stripprefix
-    simpleAuth:
+    dashboardAuth:
       basicAuth:
         users:
           - "eoas:$2y$05$2N25nFVO13/Xxv4JUetyou5eo2xnrZ5rUHXJF0/P59gwZUGgZUdrC"
 # https://community.traefik.io/t/middleware-to-add-the-if-needed/1895/19
+    cmip6Auth:
+      basicAuth:
+        users:
+          - "cmip6:$2y$05$2N25nFVO13/Xxv4JUetyou5eo2xnrZ5rUHXJF0/P59gwZUGgZUdrC"
+    a301Auth:
+      basicAuth:
+        users:
+          - "a301:$2y$05$2N25nFVO13/Xxv4JUetyou5eo2xnrZ5rUHXJF0/P59gwZUGgZUdrC"
+    a448Auth:
+      basicAuth:
+        users:
+          - "a448:$2y$05$2N25nFVO13/Xxv4JUetyou5eo2xnrZ5rUHXJF0/P59gwZUGgZUdrC"
+          

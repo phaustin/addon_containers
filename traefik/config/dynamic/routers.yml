@@ -9,7 +9,7 @@ http:
       entrypoints:
         - websecure
       middlewares:
-        - simpleAuth
-        - dashboard-strip-slash
+        - dashboardAuth@file
+        - dashboard-strip-slash@file
       tls:
         certResolver: lets-encrypt
