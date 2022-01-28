@@ -1,84 +1,173 @@
-version: '3'
+version: '3.7'
 
 services:
-# ...   
-  box1:     
-    image: containous/whoami
-    container_name: box1
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-      - "traefik.enable=false"
-    command: --port 9077
-    restart: on-failure
-    networks:
-      - proxy_aug07
-
-  box2:     
-    image: containous/whoami
-    container_name: box2
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-      - "traefik.enable=false"
-    command: --port 9088
-    restart: on-failure
-    networks:
-      - proxy_aug07
-
-
   hello_world:
     build:
       context: hello-world
       dockerfile: Dockerfile
     image: phaustin/hello_world:aug20
     labels:
-      - "traefik.enable=false"
+      - traefik.enable=true
+      - traefik.http.routers.hello_world.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/hello`)
+      - traefik.http.routers.hello_world.tls=true
+      - traefik.http.routers.hello_world.tls.certresolver=lets-encrypt
+      - traefik.http.routers.hello_world.service=hello_world
+      - traefik.http.services.hello_world.loadbalancer.server.port=8050
+      - traefik.http.routers.hello_world.middlewares=hello_world-stripprefix
+      - traefik.http.middlewares.hello_world-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.hello_world-stripprefix.stripprefix.prefixes=/hello
     container_name: hello_world
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
-    #command: python app.py
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
 
 
   hydro:
     build:
       context: hydro-ucflow
       dockerfile: Dockerfile
-    image: phaustin/hydro:aug20
+    image: phaustin/hydro:nov23
     labels:
-      - "traefik.enable=false"
+      - traefik.enable=true
+      - traefik.http.routers.hydro.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/hydro`)
+      - traefik.http.routers.hydro.tls=true
+      - traefik.http.routers.hydro.tls.certresolver=lets-encrypt
+      - traefik.http.routers.hydro.service=hydro
+      - traefik.http.services.hydro.loadbalancer.server.port=8050
+      - traefik.http.routers.hydro.middlewares=hydro-stripprefix
+      - traefik.http.middlewares.hydro-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.hydro-stripprefix.stripprefix.prefixes=/hydro
     container_name: hydro
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
     #command: python app.py
 
+
+  drawdown:
+    build:
+      context: hydro-drawdown
+      dockerfile: Dockerfile
+    image: phaustin/drawdown:nov23
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.drawdown.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/drawdown`)
+      - traefik.http.routers.drawdown.tls=true
+      - traefik.http.routers.drawdown.tls.certresolver=lets-encrypt
+      - traefik.http.routers.drawdown.service=drawdown
+      - traefik.http.services.drawdown.loadbalancer.server.port=8050
+      - traefik.http.routers.drawdown.middlewares=drawdown-stripprefix
+      - traefik.http.middlewares.drawdown-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.drawdown-stripprefix.stripprefix.prefixes=/drawdown
+    container_name: drawdown
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+
+
+  store:
+    build:
+      context: hydro-storativity
+      dockerfile: Dockerfile
+    image: phaustin/store:nov23
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.store.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/store`)
+      - traefik.http.routers.store.tls=true
+      - traefik.http.routers.store.tls.certresolver=lets-encrypt
+      - traefik.http.routers.store.service=store
+      - traefik.http.services.store.loadbalancer.server.port=8050
+      - traefik.http.routers.store.middlewares=store-stripprefix
+      - traefik.http.middlewares.store-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.store-stripprefix.stripprefix.prefixes=/store
+    container_name: store
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+
+
+  daisy:
+    build:
+      context: daisy-world
+      dockerfile: Dockerfile
+    image: phaustin/daisy:nov19
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.daisy.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/daisy`)
+      - traefik.http.routers.daisy.tls=true
+      - traefik.http.routers.daisy.tls.certresolver=lets-encrypt
+      - traefik.http.routers.daisy.service=daisy
+      - traefik.http.services.daisy.loadbalancer.server.port=8050
+      - traefik.http.routers.daisy.middlewares=daisy-stripprefix
+      - traefik.http.middlewares.daisy-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.daisy-stripprefix.stripprefix.prefixes=/daisy
+    container_name: daisy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
 
   ocgy:
     build:
       context: ocgy-dataviewer
       dockerfile: Dockerfile
-    image: phaustin/ocgy:aug20
+    image: phaustin/ocgy:nov19
     labels:
-      - "traefik.enable=false"
+      - traefik.enable=true
+      - traefik.http.routers.ocgy.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/ocgy`)
+      - traefik.http.routers.ocgy.tls=true
+      - traefik.http.routers.ocgy.tls.certresolver=lets-encrypt
+      - traefik.http.routers.ocgy.service=ocgy
+      - traefik.http.services.ocgy.loadbalancer.server.port=8050
+      - traefik.http.routers.ocgy.middlewares=ocgy-stripprefix
+      - traefik.http.middlewares.ocgy-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.ocgy-stripprefix.stripprefix.prefixes=/ocgy
     container_name: ocgy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
-    #command: python app.py
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+
+  globaltemps:
+    build:
+      context: globaltemp-factors
+      dockerfile: Dockerfile
+    image: phaustin/globaltemps:nov19
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.globaltemps.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/globaltemps`)
+      - traefik.http.routers.globaltemps.tls=true
+      - traefik.http.routers.globaltemps.tls.certresolver=lets-encrypt
+      - traefik.http.routers.globaltemps.service=globaltemps
+      - traefik.http.services.globaltemps.loadbalancer.server.port=8050
+      - traefik.http.routers.globaltemps.middlewares=globaltemps-stripprefix
+      - traefik.http.middlewares.globaltemps-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.globaltemps-stripprefix.stripprefix.prefixes=/globaltemps
+    container_name: globaltemps
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+    
 
 networks:
     proxy_aug07:
       external: true
-
-

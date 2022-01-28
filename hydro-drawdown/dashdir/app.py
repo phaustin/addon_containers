@@ -15,9 +15,9 @@ external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 server = Flask(__name__)
 app = dash.Dash(
     server=server,
-    url_base_pathname=environ.get("JUPYTERHUB_SERVICE_PREFIX", "/"),
+    requests_pathname_prefix='/drawdown/',
     external_stylesheets=external_stylesheets,
-    suppress_callback_exceptions=True,  # because of the tabs, not all callbacks are accessible so we suppress callback exceptions
+    suppress_callback_exceptions=True  # because of the tabs, not all callbacks are accessible so we suppress callback exceptions
 )
 
 # loading in markdown for the introduction and sources.

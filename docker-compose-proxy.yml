@@ -1,10 +1,10 @@
 version: '3'
 
 services:
-
   traefik:
-    image: traefik:v1.7.30-alpine
-    command: --docker
+    environment:
+      - DO_AUTH_TOKEN
+    image: "traefik:v2.5"
     ports:
       - 80:80
       - 443:443
@@ -13,11 +13,39 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${PWD}/traefik/config:/etc/traefik
-    labels:
-      - "traefik.frontend.rule=Host:eoastest2.xyz;PathPrefixStrip:/traefik"
-      - "traefik.port=8080"
     container_name: traefik
     restart: always
+
+  whoami:
+    image: "containous/whoami"
+    networks:
+      - proxy_aug07
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.rule=Host(`hub.eoastest.xyz`) && PathPrefix(`/try1`)
+      - traefik.http.routers.whoami.tls=true
+      - traefik.http.routers.whoami.tls.certresolver=lets-encrypt
+      - traefik.http.routers.whoami.service=whoami
+      - traefik.http.services.whoami.loadbalancer.server.port=80
+    container_name: whoami
+
+
+  whoami2:
+    image: "containous/whoami"
+    networks:
+      - proxy_aug07
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whomi2.rule=Host(`hub.eoastest.xyz`) && PathPrefix(`/try2`)
+      - traefik.http.routers.whomi2.tls=true
+      - traefik.http.routers.whomi2.tls.certresolver=lets-encrypt
+      - traefik.http.routers.whomi2.service=whomi2
+      - traefik.http.services.whomi2.loadbalancer.server.port=80
+    container_name: whoami2
 
 
 networks:

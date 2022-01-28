@@ -1,0 +1,15 @@
+# Dynamic Configuration
+# https://www.digitalocean.com/community/tutorials/how-to-use-traefik-v2-as-a-reverse-proxy-for-docker-containers-on-ubuntu-20-04
+
+http:
+  routers:
+    api:
+      rule: Host(`eoastest.xyz`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+      service: api@internal
+      entrypoints:
+        - websecure
+      middlewares:
+        - dashboardAuth@file
+        - dashboard-strip-slash@file
+      tls:
+        certResolver: lets-encrypt

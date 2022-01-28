@@ -8,7 +8,7 @@ services:
     build:
       context: hello_world
       dockerfile: Dockerfile
-    image: phaustin/hello_world:aug20
+    image: phaustin/hello_world:nov7
     labels:
       - "traefik.enable=false"
     container_name: hello_world

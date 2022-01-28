@@ -12,12 +12,16 @@ import json
 
 import plotting as plot
 import calculations as calc
+from flask import Flask
 
 
 # Dashboard preliminaries:
 es = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 
-app = dash.Dash(__name__, external_stylesheets=es)
+
+server = Flask(__name__)
+app = dash.Dash(__name__,server=server,
+                requests_pathname_prefix='/daisy/')
 
 # Load any markdown files to insert into the app:
 instructions = open("./assets/instructions.md", "r")

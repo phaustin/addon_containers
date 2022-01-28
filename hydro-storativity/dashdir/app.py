@@ -18,9 +18,8 @@ external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 server = Flask(__name__)
 app = dash.Dash(
     server=server,
-    url_base_pathname=environ.get("JUPYTERHUB_SERVICE_PREFIX", "/"),
-    external_stylesheets=external_stylesheets,
-)
+    requests_pathname_prefix='/store/',
+    external_stylesheets=external_stylesheets)
 
 # read in csv files containing the values displayed in the table.
 alpha_df = pd.read_csv("./alpha.csv")
