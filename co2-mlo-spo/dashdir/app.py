@@ -27,7 +27,7 @@ external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 server = Flask(__name__)
 app = dash.Dash(
     server=server,
-    url_base_pathname=environ.get("JUPYTERHUB_SERVICE_PREFIX", "/"),
+    requests_pathname_prefix='/co2mlo/',
     external_stylesheets=external_stylesheets,
 )
 

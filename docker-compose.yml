@@ -167,6 +167,28 @@ services:
     working_dir: /home/jovyan/dashdir
     command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
     
+  co2mlo:
+    build:
+      context: co2-mlo-spo
+      dockerfile: Dockerfile
+    image: phaustin/co2mlo:jan28
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.co2mlo.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/co2mlo`)
+      - traefik.http.routers.co2mlo.tls=true
+      - traefik.http.routers.co2mlo.tls.certresolver=lets-encrypt
+      - traefik.http.routers.co2mlo.service=co2mlo
+      - traefik.http.services.co2mlo.loadbalancer.server.port=8050
+      - traefik.http.routers.co2mlo.middlewares=co2mlo-stripprefix
+      - traefik.http.middlewares.co2mlo-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.co2mlo-stripprefix.stripprefix.prefixes=/co2mlo
+    container_name: co2mlo
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
 
 networks:
     proxy_aug07:
