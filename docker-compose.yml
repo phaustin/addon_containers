@@ -1,6 +1,30 @@
 version: '3.7'
 
 services:
+
+  cmip6demo:
+    build:
+      context: cmip6_demo
+      dockerfile: Dockerfile
+    image: phaustin/cmip6demo:nov19
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.cmip6demo.rule=Host(`dashdev.eoastest.xyz`) && PathPrefix(`/cmip6demo`)
+      - traefik.http.routers.cmip6demo.tls=true
+      - traefik.http.routers.cmip6demo.tls.certresolver=lets-encrypt
+      - traefik.http.routers.cmip6demo.service=cmip6demo
+      - traefik.http.services.cmip6demo.loadbalancer.server.port=8050
+      - traefik.http.routers.cmip6demo.middlewares=cmip6demo-stripprefix
+      - traefik.http.middlewares.cmip6demo-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.cmip6demo-stripprefix.stripprefix.prefixes=/cmip6demo
+    container_name: cmip6demo
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+
   hello_world:
     build:
       context: hello-world
