@@ -2,6 +2,15 @@ version: '3.7'
 
 services:
 
+  base_image:
+    image: phaustin/base_addon:apr9
+    build:
+      context: base_image
+    container_name: base_addon_apr9
+    labels:
+      - "traefik.enable=false"
+
+  
   cmip6demo:
     build:
       context: cmip6_demo
@@ -20,10 +29,13 @@ services:
     container_name: cmip6demo
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./cmip6_dashdir:/home/jovyan/dashdir
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
-    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+    # command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+    command: python app.py
+    # command: tail -F anything
 
   hello_world:
     build:

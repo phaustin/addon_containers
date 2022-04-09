@@ -1,10 +1,10 @@
-FROM phaustin/base_image:aug07
+FROM phaustin/base_addon:apr9
 
 USER ${NB_USER}
 
 RUN mkdir -p ${HOME}/dashdir
 
-COPY dashdir/ ${HOME}/dashdir/
+RUN touch ${HOME}/dashdir/version_apr_9.txt
 
 RUN echo "conda activate ${CONDA_ENV}" >> ${HOME}/.bashrc
 
