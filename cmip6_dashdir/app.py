@@ -628,7 +628,7 @@ def update_learn_plot(forcing, units):
         fig.add_annotation(
             x=2005,
             y=0.938064516129032,
-            text="<b>observed<br>temperature anomaly hot reload</b>",
+            text="<b>observed<br>temperature anomaly hot II reload</b>",
             showarrow=True,
             arrowhead=1,
         )
