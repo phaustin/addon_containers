@@ -1,0 +1,13 @@
+source_id,institution_id,country,experiment_id,variable_id,path
+CESM2,NCAR,USA,historical,cl,models/cl/CESM2_historical.zarr
+CESM2,NCAR,USA,piControl,cl,models/cl/CESM2_piControl.zarr
+CESM2,NCAR,USA,ssp585,cl,models/cl/CESM2_ssp585.zarr
+UKESM1-0-LL,MOHC,UK,historical,cl,models/cl/UKESM1-0-LL_historical.zarr
+UKESM1-0-LL,MOHC,UK,piControl,cl,models/cl/UKESM1-0-LL_piControl.zarr
+UKESM1-0-LL,MOHC,UK,abrupt-4xCO2,cl,models/cl/UKESM1-0-LL_abrupt-4xCO2.zarr
+UKESM1-0-LL,MOHC,UK,ssp585,cl,models/cl/UKESM1-0-LL_ssp585.zarr
+CanESM5,CCCma,CAN,historical,cl,models/cl/CanESM5_historical.zarr
+CanESM5,CCCma,CAN,piControl,cl,models/cl/CanESM5_piControl.zarr
+CanESM5,CCCma,CAN,abrupt-4xCO2,cl,models/cl/CanESM5_abrupt-4xCO2.zarr
+CanESM5,CCCma,CAN,ssp585,cl,models/cl/CanESM5_ssp585.zarr
+CanESM5,CCCma,CAN,hist-volc,cl,models/cl/CanESM5_hist-volc.zarr
