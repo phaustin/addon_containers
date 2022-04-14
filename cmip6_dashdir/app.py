@@ -144,7 +144,6 @@ def update_dropdown(mod_id):
     Input("model", "value"),
     Input("exp", "value"),
 )
-<<<<<<< HEAD
 def update_graph(mod_id, exp_id_list):
     fig = go.Figure()
 
@@ -165,70 +164,6 @@ def update_graph(mod_id, exp_id_list):
         '''
         if (mod_id == "CESM2") & (exp_id == "ssp585"):
             cloud_cover = spatial_mean[var_id].values*100
-=======
-def update_learn_plot(forcing, units):
-    # check units to get appropriate data
-    if units == "C":
-        data = land_ocean_data_c
-    if units == "F":
-        data = land_ocean_data_f
-
-    factors = [forcing]
-
-    # add axis lines
-    fig = px.line()
-    fig.update_layout(
-        plot_bgcolor="rgb(255, 255, 255)",
-        yaxis_zeroline=True,
-        yaxis_zerolinecolor="gainsboro",
-        yaxis_showline=True,
-        yaxis_linecolor="gainsboro",
-    )
-
-    # plot the forcings on the figure
-    fig = update_learn_factors(fig, factors, units)
-    # add the observed temperature anomoly line
-    figTemp = px.line(
-        data, x="Year", y="Annual_Mean", color_discrete_sequence=["black"]
-    )
-    figTemp.update_traces(hovertemplate="Year: %{x}<br>Annual Mean: %{y:.3f}")
-    fig.add_trace(figTemp.data[0])
-
-    # update yaxis based on unit, and add the annotation for observed temperature anomaly
-    if units == "C":
-        fig.update_yaxes(title="Temperature  Anomaly (ºC)", range=[-1.2, 1.2])
-        # annotation
-        fig.add_annotation(
-            x=2005,
-            y=0.938064516129032,
-            text="<b>observed<br>temperature anomaly hot IIIIIII reload</b>",
-            showarrow=True,
-            arrowhead=1,
-        )
-    elif units == "F":
-        fig.update_yaxes(
-            title="Temperature  Anomaly (ºF)", range=[-1.2 * 1.8, 1.2 * 1.8]
-        )
-        # annotation
-        fig.add_annotation(
-            x=2005,
-            y=0.938064516129032 * 1.8,
-            text="<b>observed<br>temperature anomaly</b>",
-            showarrow=True,
-            arrowhead=1,
-        )
-    return fig
-
-
-# function to update the student comments as an annotation on the 'explore' plot.
-def update_text(fig, text_input):
-    text_output = ""
-    for chr in text_input:
-        if (ord(chr) == 10) | (
-            ord(chr) == 13
-        ):  # replace 'enter' from the input with '<br>' to make a line break
-            text_output += "<br>"
->>>>>>> 5e78b42 (checkpoint)
         else:
             cloud_cover = spatial_mean[var_id].values
             
