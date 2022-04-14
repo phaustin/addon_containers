@@ -12,4 +12,10 @@ dependencies:
   - pandas
   - scikit-image
   - conda-lock
+  - scipy
+  - pooch
+  - cftime
+  - xarray
+  - pandas
+  - fsspec
 # conda-lock -f environment.yml -p linux-64
