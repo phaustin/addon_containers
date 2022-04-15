@@ -5,11 +5,17 @@ channels:
 dependencies:
   - dash
   - plotly
-  - python = 3.8
+  - python < 3.10.0
   - gunicorn
   - flask
   - pip
   - pandas
   - scikit-image
   - conda-lock
+  - scipy
+  - pooch
+  - cftime
+  - xarray
+  - pandas
+  - fsspec
 # conda-lock -f environment.yml -p linux-64
