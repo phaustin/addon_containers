@@ -1,4 +1,4 @@
-FROM phaustin/base_addon:apr9
+FROM phaustin/base_addon:apr9incr
 
 USER ${NB_USER}
 

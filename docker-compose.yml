@@ -3,10 +3,10 @@ version: '3.7'
 services:
 
   base_image:
-    image: phaustin/base_addon:apr9
+    image: phaustin/base_addon:apr9incr
     build:
       context: base_image
-    container_name: base_addon_apr9
+    container_name: base_addon_apr9incr
     labels:
       - "traefik.enable=false"
 
@@ -15,7 +15,7 @@ services:
     build:
       context: cmip6_demo
       dockerfile: Dockerfile
-    image: phaustin/cmip6demo:nov19
+    image: phaustin/cmip6demo:nov19incr
     labels:
       - traefik.enable=true
       - traefik.http.routers.cmip6demo.rule=Host(`dashdev.eoastest.xyz`) && PathPrefix(`/cmip6demo`)
