@@ -18,4 +18,5 @@ dependencies:
   - xarray
   - pandas
   - fsspec
+  - zarr
 # conda-lock -f environment.yml -p linux-64
