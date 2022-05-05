@@ -40,7 +40,7 @@ external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 server = Flask(__name__)
 app = dash.Dash(
     server=server,
-    #requests_pathname_prefix="/cmip6demo/",
+    requests_pathname_prefix="/cmip6-lowcloud/",
     external_stylesheets=external_stylesheets,
     suppress_callback_exceptions=True,  # because of the tabs, not all callbacks are accessible so we suppress callback exceptions
 )
