@@ -13,6 +13,14 @@ This repository contains the source code and [traefik proxy](https://traefik.io/
 
 * **[Daisyworld](https://dashboard.eoastest.xyz/daisy)** displays inhabited area as a function of time when daisyworld parameters are varied. Both constant and varying solar flux situations are modeled.  [Source: daisy-world](daisy-world). Initially used in [EOSC 310](https://www.eoas.ubc.ca/academics/courses/eosc310) in Fall term, 2021.
 
+### In development
+
+* **[cmip6-lowcloud](https://dashdev.eoastest.xyz/cmip6-lowcloud)** compares the trend in fractional low cloud cover in the eastern Pacific for a range of CMIP6 models and scenarios. [Source: cmip6-lowcloud](cmip6_lowcloud)
+
+* **[cmip6-dash](https://dashdev.eoastest.xyz/cmip6dash)**.  General tool for comparing regional changes between CMIP6 models and scenarios for different climae variables. [Source: cmip6dash](https://github.com/phaustin/cmip6_dash)
+
+* [low cloud feedback](
+
 ## Geology and hydrogeology
 
 * **[Storativity](https://dashboard.eoastest.xyz/store)** compares hydrological storativity of various geologic materials. [Source: hydro-storativity](hydro-storativity) Initially used in [EOSC 325](https://www.eoas.ubc.ca/academics/courses/eosc325) in Fall term, 2021.
