@@ -1,6 +1,6 @@
 # UBC Earth, Ocean and Atmospheric Science Dashboards
 
-This repository contains the source code and [traefik proxy](https://traefik.io/traefik/) configuration files to run a collection of [plotly](https://github.com/plotly/dash) dashboards.  Each dashboard is an individual docker container, built using this [docker-compose.yml](./docker-compose.yml) file.  Routing to the containers is currently done using [the digital ocean dns](https://docs.digitalocean.com/products/networking/dns/), with [lets encrypt's dns challenge][https://github.com/phaustin/addon_containers/blob/main/traefik/config/traefik.yml#L15-L22).
+This repository contains the source code and [traefik proxy](https://traefik.io/traefik/) configuration files to run a collection of [plotly](https://github.com/plotly/dash) dashboards.  Each dashboard is an individual docker container, built using this [docker-compose.yml](./docker-compose.yml) file.  Routing to the containers is currently done using [the digital ocean dns](https://docs.digitalocean.com/products/networking/dns/), with [lets encrypt's dns challenge](https://github.com/phaustin/addon_containers/blob/main/traefik/config/traefik.yml#L15-L22).
 
 
 ## Climate science & oceanography:
