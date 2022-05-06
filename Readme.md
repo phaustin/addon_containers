@@ -19,8 +19,6 @@ This repository contains the source code and [traefik proxy](https://traefik.io/
 
 * **[cmip6-dash](https://dashdev.eoastest.xyz/cmip6dash)**.  General tool for comparing regional changes between CMIP6 models and scenarios for different climae variables. [Source: cmip6dash](https://github.com/phaustin/cmip6_dash)
 
-* [low cloud feedback](
-
 ## Geology and hydrogeology
 
 * **[Storativity](https://dashboard.eoastest.xyz/store)** compares hydrological storativity of various geologic materials. [Source: hydro-storativity](hydro-storativity) Initially used in [EOSC 325](https://www.eoas.ubc.ca/academics/courses/eosc325) in Fall term, 2021.
