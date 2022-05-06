@@ -5,7 +5,7 @@ This repository contains the source code and [traefik proxy](https://traefik.io/
 
 ## Climate science & oceanography:
 
-* **[ocgy-dataviewer](https://dashboard.eoastest.xyz/ocgy)**: observe and compare trace element and physical properties in the water column at selected locations in the Southern Ocean, the Atlantic and the North Pacific. [Source: ocgy-dataviewer](./ocgy_dataviewr). Initially used as an assignment in [EOSC 372](https://www.eoas.ubc.ca/academics/courses/eosc372) in the Fall term, 2021.
+* **[ocgy-dataviewer](https://dashboard.eoastest.xyz/ocgy)**: observe and compare trace element and physical properties in the water column at selected locations in the Southern Ocean, the Atlantic and the North Pacific. [Source: ocgy-dataviewer](ocgy_dataviewer). Initially used as an assignment in [EOSC 372](https://www.eoas.ubc.ca/academics/courses/eosc372) in the Fall term, 2021.
 
 * **[Global temperature](https://dashboard.eoastest.xyz/globaltemps)**: Contributions of several natural and anthropogenic factors to the global temperature anomaly are plotted for 1880-2005, with short explanations. Sketch interactivity is included. [Source: global-temps](./global_temps). Initially used in [EOSC 112](https://www.eoas.ubc.ca/academics/courses/eosc11) and [EOSC 326](https://www.eoas.ubc.ca/academics/courses/eosc326) in the Fall term, 2021.
 
