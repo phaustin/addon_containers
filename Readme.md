@@ -7,7 +7,7 @@ This repository contains the source code and [traefik proxy](https://traefik.io/
 
 * **[ocgy-dataviewer](https://dashboard.eoastest.xyz/ocgy)**: observe and compare trace element and physical properties in the water column at selected locations in the Southern Ocean, the Atlantic and the North Pacific. [Source: ocgy-dataviewer](ocgy-dataviewer). Initially used as an assignment in [EOSC 372](https://www.eoas.ubc.ca/academics/courses/eosc372) in the Fall term, 2021.
 
-* **[Global temperature](https://dashboard.eoastest.xyz/globaltemps)**: Contributions of several natural and anthropogenic factors to the global temperature anomaly are plotted for 1880-2005, with short explanations. Sketch interactivity is included. [Source: global-temps](global-temps). Initially used in [EOSC 112](https://www.eoas.ubc.ca/academics/courses/eosc11) and [EOSC 326](https://www.eoas.ubc.ca/academics/courses/eosc326) in the Fall term, 2021.
+* **[Global temperature](https://dashboard.eoastest.xyz/globaltemps)**: Contributions of several natural and anthropogenic factors to the global temperature anomaly are plotted for 1880-2005, with short explanations. Sketch interactivity is included. [Source: global-temps](globaltemp-factors). Initially used in [EOSC 112](https://www.eoas.ubc.ca/academics/courses/eosc11) and [EOSC 326](https://www.eoas.ubc.ca/academics/courses/eosc326) in the Fall term, 2021.
 
 * **[Atmospheric CO2](https://dashboard.eoastest.xyz/co2mlo)**: Monthly averages at Mauna Loa and the South Pole, with user-defined straight line model for crude predictions. [Source: co2-mlo ](co2-mlo-spo). Initially used in [ENVR 300](https://www.eoas.ubc.ca/academics/courses/envr300) in Winter term 2021, then updated for Winter term 2022.
 
@@ -18,9 +18,9 @@ This repository contains the source code and [traefik proxy](https://traefik.io/
 * **[Storativity](https://dashboard.eoastest.xyz/store)** compares hydrological storativity of various geologic materials. [Source: hydro-storativity](hydro-storativity) Initially used in [EOSC 325](https://www.eoas.ubc.ca/academics/courses/eosc325) in Fall term, 2021.
 
 * **[Unconfined-flow](https://dashboard.eoastest.xyz/hydro)** interactive model of linar ("1D") groundwater flow in an unconfined acquifer between two sources, with surface recharge included.  
-[Source: unconfined-flow](hydro). Initially used in [EOSC 325](https://www.eoas.ubc.ca/academics/courses/eosc325) in Fall term, 2021.
+[Source: unconfined-flow](hydro-ucflow). Initially used in [EOSC 325](https://www.eoas.ubc.ca/academics/courses/eosc325) in Fall term, 2021.
 
-* **[Drawdown](https://dashboard.eoastest.xyz/drawdown)** for confined and unconfined acquifers plots 2D drawdown curves for a well in a uniform acquifer with adjustable properties.  [Source: drawdown](drawdown). Initially used in [EOSC 325](https://www.eoas.ubc.ca/academics/courses/eosc325) in Fall term, 2021.
+* **[Drawdown](https://dashboard.eoastest.xyz/drawdown)** for confined and unconfined acquifers plots 2D drawdown curves for a well in a uniform acquifer with adjustable properties.  [Source: drawdown](hydro-drawdown). Initially used in [EOSC 325](https://www.eoas.ubc.ca/academics/courses/eosc325) in Fall term, 2021.
 
 ## Geophysics or "signals"
 
