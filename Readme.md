@@ -33,3 +33,6 @@ This repository contains the source code and [traefik proxy](https://traefik.io/
 * **[timeseries-3signals](https://dashboard.eoastest.xyz/timeseries)** adjustable parameters illustrating noise and trend on a sinewave, with smoothing.  
 [Source: timeseries](timeseries). Initially used in [ENVR 300](https://www.eoas.ubc.ca/academics/courses/envr300) in Winter term 2021, then updated for Winter term 2022.
 
+# Traefik configuration
+
+See [traefik/config](traefik/config) for static and dynamic route configuration.
