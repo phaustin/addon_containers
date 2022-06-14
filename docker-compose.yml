@@ -28,7 +28,7 @@ services:
     container_name: cmip6lowcloud
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./cmip6_dashdir:/home/jovyan/dashdir
+      - ./cmip6_lowcloud/cmip6_dashdir:/home/jovyan/dashdir
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
