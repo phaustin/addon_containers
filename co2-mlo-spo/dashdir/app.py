@@ -14,6 +14,7 @@ from os import environ
 import dash
 import numpy as np
 import pandas as pd
+
 # plotly express could be used for simple applications
 # but this app needs to build plotly graph components separately
 import plotly.graph_objects as go
@@ -332,8 +333,21 @@ def update_graph(
 
     l1 = line_slope * (spo_data.date - np.min(spo_data.date)) + line_intcpt
 
+    hovertexts = []
     # plot the co2 data
     if "mlo" in data_type:
+        #adding hovertext
+        for indx in range(len(mlo_data_plot["month"])):
+            year = mlo_data_plot["year"].iloc[indx]
+            month_number = str(mlo_data_plot["month"].iloc[indx])
+            month = datetime.datetime.strptime(month_number, "%m").strftime("%B")
+            co2 = mlo_data_plot["raw_co2"].iloc[indx]
+            hovertexts.append(
+                "Year: {yr},<br>Month: {mn},<br>CO_2: {co2}".format(
+                    yr=year, mn=month, co2=co2
+                )
+            )
+        #add the trace
         plot.add_trace(
             go.Scatter(
                 x=mlo_data_plot.date,
@@ -341,9 +355,23 @@ def update_graph(
                 mode="markers",
                 line=dict(color="DodgerBlue"),
                 name="CO_2 - Mauna Loa".ljust(20, " "),
+                hoverinfo="text",
+                hovertext=hovertexts,
             )
         )
     if "spo" in data_type:
+        #adding hovertext
+        for indx in range(len(spo_data_plot["month"])):
+            year = spo_data_plot["year"].iloc[indx]
+            month_number = str(spo_data_plot["month"].iloc[indx])
+            month = datetime.datetime.strptime(month_number, "%m").strftime("%B")
+            co2 = spo_data_plot["raw_co2"].iloc[indx]
+            hovertexts.append(
+                "Year: {yr},<br>Month: {mn},<br>CO_2: {co2}".format(
+                    yr=year, mn=month, co2=co2
+                )
+            )
+        #add the trace
         plot.add_trace(
             go.Scatter(
                 x=spo_data_plot.date,
@@ -351,9 +379,23 @@ def update_graph(
                 mode="markers",
                 line=dict(color="DarkOrange"),
                 name="CO_2 - South Pole".ljust(20, " "),
+                hoverinfo="text",
+                hovertext=hovertexts,
             )
         )
     if "fit" in data_type:
+        #add hovertext
+        for indx in range(len(spo_data_plot["month"])):
+            year = spo_data_plot["year"].iloc[indx]
+            month_number = str(spo_data_plot["month"].iloc[indx])
+            month = datetime.datetime.strptime(month_number, "%m").strftime("%B")
+            co2 = spo_data_plot["raw_co2"].iloc[indx]
+            hovertexts.append(
+                "Year: {yr},<br>Month: {mn},<br>CO_2: {co2}".format(
+                    yr=year, mn=month, co2=co2
+                )
+            )
+        #add trace 
         plot.add_trace(
             go.Scatter(
                 x=spo_data.date,
@@ -361,6 +403,8 @@ def update_graph(
                 mode="lines",
                 line=dict(color="#525252"),
                 name="adjustable straight<br>line",
+                hoverinfo="text",
+                hovertext=hovertexts,
             )
         )
 
