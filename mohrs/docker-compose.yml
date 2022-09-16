@@ -1,0 +1,27 @@
+#
+# 
+#
+version: '3.8'
+
+services:
+  mohrs:
+    build:
+      context: mohrs
+      dockerfile: Dockerfile
+    image: phaustin/mohrs:aug20
+    labels:
+      - "traefik.enable=false"
+    container_name: mohrs
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=5 --threads=1 -b 0.0.0.0:8050 app:server
+    #command: python app.py
+
+
+networks:
+    proxy_aug07:
+      external: true
+
