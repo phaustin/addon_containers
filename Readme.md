@@ -28,6 +28,8 @@ This repository contains the source code and [traefik proxy](https://traefik.io/
 
 * **[Drawdown](https://dashboard.eoastest.xyz/drawdown)** for confined and unconfined acquifers plots 2D drawdown curves for a well in a uniform acquifer with adjustable properties.  [Source: drawdown](hydro-drawdown). Initially used in [EOSC 325](https://www.eoas.ubc.ca/academics/courses/eosc325) in Fall term, 2021.
 
+* **[Mohrs](https://dashboard.eoastest.xyz/mohrs)** for exploring Mohr's circle representation of stresses and failure within rocks.  [Source: mohrs](mohrs). Initially built for use in [EOSC 323](https://www.eoas.ubc.ca/academics/courses/eosc323), [422](https://www.eoas.ubc.ca/academics/courses/eosc422) and [424](https://www.eoas.ubc.ca/academics/courses/eosc424).
+
 ## Geophysics or "signals"
 
 * **[timeseries-3signals](https://dashboard.eoastest.xyz/timeseries)** adjustable parameters illustrating noise and trend on a sinewave, with smoothing.  
