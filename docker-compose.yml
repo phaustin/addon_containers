@@ -245,6 +245,29 @@ services:
     working_dir: /home/jovyan/dashdir
     command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
 
+  mohrs:
+    build:
+      context: mohrs
+      dockerfile: Dockerfile
+    image: phaustin/mohrs:sep20
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mohrs.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/mohrs`)
+      - traefik.http.routers.mohrs.tls=true
+      - traefik.http.routers.mohrs.tls.certresolver=lets-encrypt
+      - traefik.http.routers.mohrs.service=mohrs
+      - traefik.http.services.mohrs.loadbalancer.server.port=8050
+      - traefik.http.routers.mohrs.middlewares=mohrs-stripprefix
+      - traefik.http.middlewares.mohrs-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.mohrs-stripprefix.stripprefix.prefixes=/mohrs
+    container_name: mohrs
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+
 networks:
   proxy_aug07:
     external: true
