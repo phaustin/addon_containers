@@ -21,9 +21,9 @@ done using UBC certificates here [ocese_traefik:docker_compose.yml](https://gith
 
 ### In development
 
-* **[cmip6-lowcloud](https://dashdev.eoastest.xyz/cmip6-lowcloud)** compares the trend in fractional low cloud cover in the eastern Pacific for a range of CMIP6 models and scenarios. [Source: cmip6-lowcloud](cmip6_lowcloud)
+* **[cmip6-lowcloud](https://dashboard.eoas.ubc.ca/cmip6-lowcloud)** compares the trend in fractional low cloud cover in the eastern Pacific for a range of CMIP6 models and scenarios. [Source: cmip6-lowcloud](cmip6_lowcloud)
 
-* **[cmip6-dash](https://dashdev.eoastest.xyz/cmip6dash)**.  General tool for comparing regional changes between CMIP6 models and scenarios for different climae variables. [Source: cmip6dash](https://github.com/phaustin/cmip6_dash)
+* **[cmip6-dash](https://dashboard.eoas.ubc.ca/cmip6dash)**.  General tool for comparing regional changes between CMIP6 models and scenarios for different climae variables. [Source: cmip6dash](https://github.com/phaustin/cmip6_dash)
 
 ## Geology and hydrogeology
 
