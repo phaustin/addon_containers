@@ -17,7 +17,7 @@ services:
     image: phaustin/cmip6lowcloud:nov19incr
     labels:
       - traefik.enable=true
-      - traefik.http.routers.cmip6lowcloud.rule=Host(`dashdev.eoastest.xyz`) && PathPrefix(`/cmip6-lowcloud`)
+      - traefik.http.routers.cmip6lowcloud.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/cmip6-lowcloud`)
       - traefik.http.routers.cmip6lowcloud.tls=true
       - traefik.http.routers.cmip6lowcloud.tls.certresolver=lets-encrypt
       - traefik.http.routers.cmip6lowcloud.service=cmip6lowcloud
