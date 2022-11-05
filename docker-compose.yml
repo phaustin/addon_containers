@@ -43,7 +43,7 @@ services:
     image: phaustin/hello_world:aug20
     labels:
       - traefik.enable=true
-      - traefik.http.routers.hello_world.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/hello`)
+      - traefik.http.routers.hello_world.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/hello`)
       - traefik.http.routers.hello_world.tls=true
       - traefik.http.routers.hello_world.tls.certresolver=lets-encrypt
       - traefik.http.routers.hello_world.service=hello_world
@@ -66,7 +66,7 @@ services:
     image: phaustin/hydro:nov23
     labels:
       - traefik.enable=true
-      - traefik.http.routers.hydro.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/hydro`)
+      - traefik.http.routers.hydro.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/hydro`)
       - traefik.http.routers.hydro.tls=true
       - traefik.http.routers.hydro.tls.certresolver=lets-encrypt
       - traefik.http.routers.hydro.service=hydro
@@ -91,7 +91,7 @@ services:
     image: phaustin/drawdown:nov23
     labels:
       - traefik.enable=true
-      - traefik.http.routers.drawdown.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/drawdown`)
+      - traefik.http.routers.drawdown.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/drawdown`)
       - traefik.http.routers.drawdown.tls=true
       - traefik.http.routers.drawdown.tls.certresolver=lets-encrypt
       - traefik.http.routers.drawdown.service=drawdown
@@ -114,7 +114,7 @@ services:
     image: phaustin/store:nov23
     labels:
       - traefik.enable=true
-      - traefik.http.routers.store.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/store`)
+      - traefik.http.routers.store.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/store`)
       - traefik.http.routers.store.tls=true
       - traefik.http.routers.store.tls.certresolver=lets-encrypt
       - traefik.http.routers.store.service=store
@@ -137,7 +137,7 @@ services:
     image: phaustin/daisy:nov19
     labels:
       - traefik.enable=true
-      - traefik.http.routers.daisy.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/daisy`)
+      - traefik.http.routers.daisy.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/daisy`)
       - traefik.http.routers.daisy.tls=true
       - traefik.http.routers.daisy.tls.certresolver=lets-encrypt
       - traefik.http.routers.daisy.service=daisy
@@ -160,7 +160,7 @@ services:
     image: phaustin/ocgy:nov19
     labels:
       - traefik.enable=true
-      - traefik.http.routers.ocgy.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/ocgy`)
+      - traefik.http.routers.ocgy.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/ocgy`)
       - traefik.http.routers.ocgy.tls=true
       - traefik.http.routers.ocgy.tls.certresolver=lets-encrypt
       - traefik.http.routers.ocgy.service=ocgy
@@ -183,7 +183,7 @@ services:
     image: phaustin/globaltemps:nov19
     labels:
       - traefik.enable=true
-      - traefik.http.routers.globaltemps.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/globaltemps`)
+      - traefik.http.routers.globaltemps.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/globaltemps`)
       - traefik.http.routers.globaltemps.tls=true
       - traefik.http.routers.globaltemps.tls.certresolver=lets-encrypt
       - traefik.http.routers.globaltemps.service=globaltemps
@@ -206,7 +206,7 @@ services:
     image: phaustin/co2mlo:jan28
     labels:
       - traefik.enable=true
-      - traefik.http.routers.co2mlo.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/co2mlo`)
+      - traefik.http.routers.co2mlo.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/co2mlo`)
       - traefik.http.routers.co2mlo.tls=true
       - traefik.http.routers.co2mlo.tls.certresolver=lets-encrypt
       - traefik.http.routers.co2mlo.service=co2mlo
@@ -229,7 +229,7 @@ services:
     image: phaustin/timeseries:jan28
     labels:
       - traefik.enable=true
-      - traefik.http.routers.timeseries.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/timeseries`)
+      - traefik.http.routers.timeseries.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/timeseries`)
       - traefik.http.routers.timeseries.tls=true
       - traefik.http.routers.timeseries.tls.certresolver=lets-encrypt
       - traefik.http.routers.timeseries.service=timeseries

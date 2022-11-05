@@ -9,7 +9,7 @@ services:
     image: phaustin/mohrs:sep20
     labels:
       - traefik.enable=true
-      - traefik.http.routers.mohrs.rule=Host(`dashboard.eoastest.xyz`) && PathPrefix(`/mohrs`)
+      - traefik.http.routers.mohrs.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/mohrs`)
       - traefik.http.routers.mohrs.tls=true
       - traefik.http.routers.mohrs.tls.certresolver=lets-encrypt
       - traefik.http.routers.mohrs.service=mohrs
