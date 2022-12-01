@@ -3,7 +3,6 @@
 
 # These are the colours and colour order of the clicked stations
 colours = [
-    "red",
     "darkviolet",
     "limegreen",
     "darkorange",
@@ -12,13 +11,12 @@ colours = [
     "darkgreen",
 ]
 
-#for more symbols and styling: https://plotly.com/python/marker-style/#:~:text=5%205.5%206-,Custom%20Marker%20Symbols,hash%20%2C%20y%20%2C%20and%20line%20.
+# for more symbols and styling: https://plotly.com/python/marker-style/#:~:text=5%205.5%206-,Custom%20Marker%20Symbols,hash%20%2C%20y%20%2C%20and%20line%20.
 symbols = [
     "square",
     "diamond",
     "cross",
     "x",
-    "triangle",
     "pentagon",
     "hexagram",
     "star",
@@ -60,15 +58,27 @@ def is_empty(hov_station):
 
 
 # getting the next colour in the series to plot
-def get_colour(station):
-    if station == "GP02":
-        return "red"
-    elif station == "GA03":
-        return "green"
-    elif station == "GIPY04":
-        return "goldenrod"
-    elif station == "GIPY05":
-        return "magenta"
+def get_colour(station, list_stations=""):
+    color_exists = False
+    if list_stations == "":
+        if station == "GP02":
+            return "red"
+        elif station == "GA03":
+            return "green"
+        elif station == "GIPY04":
+            return "goldenrod"
+        elif station == "GIPY05":
+            return "magenta"
+    else:
+        for c in colours:
+            color_exists = False
+            for s in list_stations:
+                if s["colour"] == c:
+                    color_exists = True
+                    break
+            if not color_exists:
+                return c
+        return "blue"
 
 
 # check if there is a station that already has the given symbol
@@ -122,7 +132,7 @@ def get_click_stations(click_data, click_stations):
 
             click_stations.append(
                 Station(
-                    "click", lat, lon, name, date, get_colour(click_data["points"][0]["customdata"][0]),
+                    "click", lat, lon, name, date, get_colour(click_data["points"][0]["customdata"][0], click_stations),
                     get_symbol(click_stations)
                 ).__dict__
             )
