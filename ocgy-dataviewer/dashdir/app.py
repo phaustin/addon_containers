@@ -294,12 +294,6 @@ def update_profiles(
     fig = plot.update_profiles(
             hov_station, click_stations, fig_profiles, y_range
      )
-    # for i in range(6):
-    #     axis = 'yaxis'
-    #     if i != 0:
-    #         axis = axis + str(i)
-    #     if "autorange" in fig['layout'][axis].keys():
-    #         fig['layout'][axis].pop('autorange')
     fig.update_yaxes(autorange=False, range = y_range)
     print(fig.layout)
     return fig
