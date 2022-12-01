@@ -35,9 +35,9 @@ initial_x_range = "default"
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 
 server = Flask(__name__)
-app = dash.Dash(__name__,server=server,
-                requests_pathname_prefix='/ocgy/',  # comment out this line to run locally. Keep for deploying on server.
-                external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__,server=server,)
+                # requests_pathname_prefix='/ocgy/',  # comment out this line to run locally. Keep for deploying on server.
+                # external_stylesheets=external_stylesheets)
 
 app.layout = html.Div(
     [
@@ -53,7 +53,7 @@ app.layout = html.Div(
                     config={
                         "staticPlot": False,  # True, False
                         "scrollZoom": True,  # True, False
-                        "doubleClick": "reset",  # 'reset', 'autosize' or 'reset+autosize', False
+                        "doubleClick": "autosize",  # 'reset', 'autosize' or 'reset+autosize', False
                         "showTips": True,  # True, False
                         "displayModeBar": False,  # True, False, 'hover'
                         "watermark": True,
@@ -141,11 +141,12 @@ app.layout = html.Div(
                     id="profiles",
                     config={
                         "staticPlot": False,  # True, False
-                        "scrollZoom": False,  # True, False
-                        "doubleClick": "reset",  # 'reset', 'autosize' or 'reset+autosize', False
+                        "scrollZoom": True,  # True, False
+                        "doubleClick": 'reset',  # 'reset', 'autosize' or 'reset+autosize', False
                         "showTips": True,  # True, False
                         "displayModeBar": "hover",  # True, False, 'hover'
                         "watermark": False,
+
                         "modeBarButtonsToRemove": [
                             "resetAxis",
                             "pan2d",
@@ -280,6 +281,7 @@ def update_profiles(
                 "<b>Nitrate/Iron</b>",
             ),
         )
+
         fig_profiles.update(
             data=fig_profiles_dict["data"], layout=fig_profiles_dict["layout"]
         )
@@ -292,6 +294,14 @@ def update_profiles(
     fig = plot.update_profiles(
             hov_station, click_stations, fig_profiles, y_range
      )
+    # for i in range(6):
+    #     axis = 'yaxis'
+    #     if i != 0:
+    #         axis = axis + str(i)
+    #     if "autorange" in fig['layout'][axis].keys():
+    #         fig['layout'][axis].pop('autorange')
+    fig.update_yaxes(autorange=False, range = y_range)
+    print(fig.layout)
     return fig
 
 
