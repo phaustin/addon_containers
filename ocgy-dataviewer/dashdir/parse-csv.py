@@ -173,6 +173,7 @@ for i in range(len(GA03)):
         positions.append([lat, lon])
         stations.append(station)
 # print(stations)
+#GA03 = average_data(GA03)
 for i in [4]:  # choosing specific profiles
     GA03 = GA03.drop(
         GA03[
