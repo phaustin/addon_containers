@@ -24,7 +24,6 @@ cruises = cruises[:,0]
 all_data['Cruise'] = cruises
 
 
-
 # SUBPLOTS PLOTTING
 def get_x_y_values(lat, lon, data_name):
     # getting the x and y values to plot the depth profile for a given parameter (data_name) at a given lat and lon
@@ -125,16 +124,15 @@ def clear_click_traces(fig):
 def initialize_profiles(y_range):
     fig = make_subplots(  # initialize subplots with titles
         rows=1,
-        cols=6,
-        subplot_titles=(
-            "<b>Temperature</b>",
-            "<b>Salinity</b>",
-            "<b>Sigma0*</b>",
-            "<b>Nitrate</b>",
-            "<b>Iron</b>",
-            "<b>Nitrate/Iron**</b>",
-        ),
-    )
+        cols=6)
+                        #subplot_titles=(
+                        #    "<b>Temperature</b>",
+                        #    "<b>Salinity</b>",
+                        #    "<b>Sigma0*</b>",
+                        #    "<b>Nitrate</b>",
+                        #    "<b>Iron</b>",
+                        #    "<b>Nitrate/Iron**</b>",
+                        #),
 
     # empty traces for hovered data
     figT = px.scatter(x=[None], y=[None])
@@ -143,6 +141,14 @@ def initialize_profiles(y_range):
     figN = px.scatter(x=[None], y=[None])
     figI = px.scatter(x=[None], y=[None])
     figR = px.scatter(x=[None], y=[None])
+    
+    #Adds lines between the markers.
+   # figT.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+   # figS.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+   # figD.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+   # figN.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+   # figI.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+   # figR.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
 
     fig.add_trace(figT.data[0], row=1, col=1)
     fig.add_trace(figS.data[0], row=1, col=2)
@@ -160,6 +166,14 @@ def initialize_profiles(y_range):
         figI = px.scatter(x=[None], y=[None])
         figR = px.scatter(x=[None], y=[None])
 
+        #Adds lines between the markers.
+        #figT.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+        #figS.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+        #figD.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+        #figN.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+        #figI.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+        #figR.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+    
         fig.add_trace(figT.data[0], row=1, col=1)
         fig.add_trace(figS.data[0], row=1, col=2)
         fig.add_trace(figD.data[0], row=1, col=3)
@@ -177,18 +191,28 @@ def initialize_profiles(y_range):
         xaxis5=dict(side="top"),
         xaxis6=dict(side="top"),
     )
-    fig.update_annotations(yshift=-410)  # moving titles to bottom of plot
+    #fig.update_annotations(yshift=-410)  # moving titles to bottom of plot
+    #fig.update_annotations(yshift=50) #move titles to top of plot
     fig.update_layout(margin={"l": 0, "b": 40, "r": 100, "t": 30})
 
-    # customize x axes
-    fig.update_xaxes(title_text="deg C", row=1, col=1)
-    fig.update_xaxes(title_text="Practical Salinity", row=1, col=2)
-    fig.update_xaxes(title_text="kg/m\u00B3", row=1, col=3)  # unicode for the m^3
-    fig.update_xaxes(title_text="umol/kg", row=1, col=4)
-    fig.update_xaxes(title_text="nmol/kg", row=1, col=5)
-    fig.update_xaxes(title_text="umol/nmol", row=1, col=6)
-
+    # customize x axes (use for auto updating axes)
+    fig.update_xaxes(title_text="<b>Temperature</b><br>(\u00BAC)", row=1, col=1)
+    fig.update_xaxes(title_text="<b>Salinity</b><br>(Practical Salinity)", row=1, col=2)
+    fig.update_xaxes(title_text="<b>Sigma0*</b><br>(kg/m\u00B3)", row=1, col=3)  # unicode for the m^3
+    fig.update_xaxes(title_text="<b>Nitrate</b><br>(\u03BCmol/kg)", row=1, col=4)
+    fig.update_xaxes(title_text="<b>Iron</b><br>(nmol/kg)", row=1, col=5)
+    fig.update_xaxes(title_text="<b>Nitrate/Iron**</b><br>(\u03BCmol/nmol)", row=1, col=6)
     fig = update_x_range(fig)
+    
+    #initial fixed x axes
+    #fig.update_xaxes(title_text="<b>Temperature</b><br>(\u00BAC)", range = (-3,29), nticks = 3, row=1, col=1)
+    #fig.update_xaxes(title_text="<b>Salinity</b><br>(Practical Salinity)", range = (30,38), nticks = 3, row=1, col=2)
+    #fig.update_xaxes(title_text="<b>Sigma0*</b><br>(kg/m\u00B3)", range = (22,29), nticks = 3, row=1, col=3)  # unicode for the m^3
+    #fig.update_xaxes(title_text="<b>Nitrate</b><br>(\u03BCmol/kg)", range = (-1,45), nticks = 3, row=1, col=4)
+    #fig.update_xaxes(title_text="<b>Iron</b><br>(nmol/kg)", range = (-0.1,2), nticks = 3, row=1, col=5)
+    #fig.update_xaxes(title_text="<b>Nitrate/Iron**</b><br>(\u03BCmol/nmol)", range = (-5,625), nticks = 3, row=1, col=6)
+
+    fig.update_layout(template  = "simple_white")
 
     return fig
 

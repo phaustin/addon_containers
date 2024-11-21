@@ -190,7 +190,7 @@ app.layout = html.Div(
         dcc.Store(id="hov_station", data={}, storage_type="memory"),
         dcc.Store(id="click_stations", data={}, storage_type="memory"),
     ],
-    style={"width": "1000px"},
+    style={"width": "1250px"},
 )
 
 
@@ -272,14 +272,14 @@ def update_profiles(
         fig_profiles = make_subplots(
             rows=1,
             cols=6,
-            subplot_titles=(
-                "<b>Temperature</b>",
-                "<b>Salinity</b>",
-                "<b>Sigma0*</b>",
-                "<b>Nitrate</b>",
-                "<b>Iron</b>",
-                "<b>Nitrate/Iron</b>",
-            ),
+            #     subplot_titles=(
+            #         "<b>Temperature</b>",
+            #         "<b>Salinity</b>",
+            #         "<b>Sigma0*</b>",
+            #         "<b>Nitrate</b>",
+            #         "<b>Iron</b>",
+            #         "<b>Nitrate/Iron</b>",
+            #     ),
         )
 
         fig_profiles.update(
