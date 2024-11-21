@@ -2,21 +2,21 @@ version: '3.7'
 
 services:
 
-  mohrs:
+  ocgy24:
     build:
       context: ocgy-dataviewer
       dockerfile: Dockerfile
     image: phaustin/ocgy:nov24
     labels:
       - traefik.enable=true
-      - traefik.http.routers.mohrs.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/ocgy24`)
-      - traefik.http.routers.mohrs.tls=true
-      - traefik.http.routers.mohrs.tls.certresolver=lets-encrypt
-      - traefik.http.routers.mohrs.service=mohrs
-      - traefik.http.services.mohrs.loadbalancer.server.port=8050
-      - traefik.http.routers.mohrs.middlewares=mohrs-stripprefix
-      - traefik.http.middlewares.mohrs-stripprefix.stripprefix.forceSlash=true
-      - traefik.http.middlewares.mohrs-stripprefix.stripprefix.prefixes=/mohrs
+      - traefik.http.routers.ocgy24.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/ocgy24`)
+      - traefik.http.routers.ocgy24.tls=true
+      - traefik.http.routers.ocgy24.tls.certresolver=lets-encrypt
+      - traefik.http.routers.ocgy24.service=ocgy24
+      - traefik.http.services.ocgy24.loadbalancer.server.port=8050
+      - traefik.http.routers.ocgy24.middlewares=ocgy24-stripprefix
+      - traefik.http.middlewares.ocgy24-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.ocgy24-stripprefix.stripprefix.prefixes=/ocgy24
     container_name: ocgy24
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
