@@ -6,7 +6,7 @@ services:
     build:
       context: ocgy-dataviewer
       dockerfile: Dockerfile
-    image: phaustin/ocgy:nov24
+    image: phaustin/ocgy24:nov24
     labels:
       - traefik.enable=true
       - traefik.http.routers.ocgy24.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/ocgy24`)
