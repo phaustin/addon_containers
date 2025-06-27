@@ -1,7 +1,7 @@
 import os
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 import pandas as pd
 import plotly.graph_objs as go
 from flask import Flask
@@ -65,5 +65,5 @@ app.layout = html.Div([
 ])
 
 if __name__ == '__main__':
-    app.run_server(debug=True, port=8050)
+    app.run(host='0.0.0.0', debug=True, port=8000)
 
