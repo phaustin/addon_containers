@@ -4,10 +4,14 @@ channels:
   - conda-forge
 dependencies:
   - dash
-  - python = 3.8
+  - python
   - gunicorn
   - flask
   - pip
   - pandas
   - conda-lock
+  - plotly
+  - numpy
+  - gsw
+  
 # conda-lock -f environment.yml -p linux-64
