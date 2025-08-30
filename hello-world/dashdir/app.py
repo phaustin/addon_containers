@@ -32,7 +32,7 @@ def generate_table(dataframe, max_rows=10):
     )
 
 app.layout = html.Div([
-    html.H2('Hello World MT Cars'),
+    html.H2('Hello World MT Cars New'),
     html.P('This is a demonstration of how to use dash/plotly to deploy an interactive web app!'),
     dcc.Graph(
         id = "plot1",

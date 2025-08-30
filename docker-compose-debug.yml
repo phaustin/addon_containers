@@ -3,10 +3,10 @@ version: '3.7'
 services:
 
   base_image:
-    image: phaustin/base_addon:apr9incr
+    image: phaustin/base_image:aug07
     build:
       context: base_image
-    container_name: base_addon_apr9incr
+    container_name: base_image_aug07
     labels:
       - "traefik.enable=false"
 
@@ -14,7 +14,7 @@ services:
     build:
       context: hello-world
       dockerfile: Dockerfile
-    image: phaustin/hello_world:aug20
+    image: phaustin/hello_world:2025b
     labels:
       - traefik.enable=true
       - traefik.http.routers.hello_world.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/hello`)
