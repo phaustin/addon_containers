@@ -1,7 +1,7 @@
 import os
 import dash
-from dash import dcc
-from dash import html
+import dash_core_components as dcc
+import dash_html_components as html
 import pandas as pd
 import plotly.graph_objs as go
 from flask import Flask
@@ -32,7 +32,7 @@ def generate_table(dataframe, max_rows=10):
     )
 
 app.layout = html.Div([
-    html.H2('Hello World MT Cars'),
+    html.H2('Hello World MT Cars New 2'),
     html.P('This is a demonstration of how to use dash/plotly to deploy an interactive web app!'),
     dcc.Graph(
         id = "plot1",
@@ -65,5 +65,5 @@ app.layout = html.Div([
 ])
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port=8000)
+    app.run_server(debug=True, port=8050)
 

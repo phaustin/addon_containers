@@ -6,7 +6,7 @@ services:
     build:
       context: mohrs
       dockerfile: Dockerfile
-    image: phaustin/mohrs:sep20
+    image: phaustin/mohrs:2025
     labels:
       - traefik.enable=true
       - traefik.http.routers.mohrs.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/mohrs`)

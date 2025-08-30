@@ -4,7 +4,7 @@ channels:
   - conda-forge
 dependencies:
   - pip
-  - python
+  - python=3.8
   - click
   - dash
   - dash-core-components
@@ -15,4 +15,8 @@ dependencies:
   - numpy
   - scipy
   - matplotlib
+  - pandas
+  - jupytext
+  - mamba
+  - conda-lock
 # conda-lock -f environment.yml -p linux-64

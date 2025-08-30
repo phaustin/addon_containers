@@ -6,17 +6,17 @@ services:
     build:
       context: ocgy-dataviewer
       dockerfile: Dockerfile
-    image: phaustin/ocgy24:aug29
+    image: phaustin/ocgy24:nov24
     labels:
       - traefik.enable=true
-      - traefik.http.routers.ocgy24.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/ocgy24`)
+      - traefik.http.routers.ocgy24.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/ocgy`)
       - traefik.http.routers.ocgy24.tls=true
       - traefik.http.routers.ocgy24.tls.certresolver=lets-encrypt
       - traefik.http.routers.ocgy24.service=ocgy24
       - traefik.http.services.ocgy24.loadbalancer.server.port=8050
       - traefik.http.routers.ocgy24.middlewares=ocgy24-stripprefix
       - traefik.http.middlewares.ocgy24-stripprefix.stripprefix.forceSlash=true
-      - traefik.http.middlewares.ocgy24-stripprefix.stripprefix.prefixes=/ocgy24
+      - traefik.http.middlewares.ocgy24-stripprefix.stripprefix.prefixes=/ocgy
     container_name: ocgy24
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
