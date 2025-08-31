@@ -4,12 +4,12 @@ channels:
   - conda-forge
 dependencies:
   - dash
+  - dash-html-components
   - python
   - gunicorn
   - flask
   - pip
   - pandas
-  - conda-lock
   - plotly
   - numpy
   - gsw
