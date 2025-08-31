@@ -1,7 +1,14 @@
 # syntax=docker/dockerfile:1
 # Dockerfile for base image of all pangeo images
-FROM amd64/ubuntu:24.04
 # build file for pangeo images
+# https://github.com/pangeo-data/pangeo-docker-images.git
+# commit 5435b7fdf59483999c213b609cf2731d265db6e1
+# Author: Scott Henderson <3924836+scottyhq@users.noreply.github.com>
+# Date:   Wed Jul 30 21:08:20 2025 -0700
+#     Update ubuntu to 24.04 (#617)
+#     * Update ubuntu to 24.04
+#     * Rename /home/ubuntu to /home/jovyan 
+FROM amd64/ubuntu:24.04
 
 LABEL org.opencontainers.image.source=https://github.com/pangeo-data/pangeo-docker-images
 
