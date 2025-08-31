@@ -2,10 +2,52 @@
 
 1. `ssh dashjov`
 2. `cd ~/repos/addon_containers`
-3. git fetch and update main branch
-   - git checkout dev24
+3. git fetch and update dev25 branch
+   - `git checkout dev24`
    - `git fetch origin`
    - `git reset --hard origin/dev25` 
-4. `docker compose build ocgy`  -- rebuild build phaustin/ocgy:aug20
-5. `docker-compose down  ocgy`   -- bring down the old ocgy container
-6. `docker-compose up ocgy -d`  -- bring up the modified ocgy container
+4. `docker compose -f docker-compose-ocgy.yml build`  -- rebuild build phaustin/ocgy25:2025
+5. `docker compose -f docker-compose-ocgy.yml down ocgy25`   -- bring down the old ocgy container
+6. `docker compose -f docker-compose-ocgy.yml up -d`  -- bring up the modified ocgy container in detached mode
+
+## debugging
+
+1. If you getting a python error about a missing dictionary key, make sure you type `docker compose` not `docker-compose`
+2. The routing point has to exactly match in three different places: line 12 and line 19 in docker-compose-ocgy.yml and
+   line 39 in ocgy-dataviewer/dashdir/app.py
+
+## useful docker commands
+
+- `docker ps` lists all running containers
+- `docker ps -a` lists all containers
+- `docker ps -a | awk '{print $NF}'` prints the last column (container names)
+- `docker rm name` deletes a container
+- `docker image list` lists all images
+- `docker image rm name` removes an image
+- To clear all containers, volumes, images and unused networks
+
+     #!/bin/bash -v
+     docker-compose down
+     docker stop $(docker ps -aq)
+     docker rm $(docker ps -a -q)
+     docker volume rm $(docker volume ls -q)
+     docker network prune -f
+     #docker rmi $(docker images -q)
+
+- To start and look inside an image
+
+  - `docker run -i -t phaustin/base_image:aug07 /bin/bash`
+
+- To look inside a running container named ocgy25
+
+  - docker exec -it ocgy25 /bin/bash
+
+- To rebuild the base image
+
+  - `cd ~/repos/addon_containers/base_image
+  - `docker build -t phaustin/base_image:2025`
+  
+ 
+
+
+

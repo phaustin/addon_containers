@@ -24,7 +24,7 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 server = Flask(__name__)
 app = dash.Dash(
     server=server,
-    requests_pathname_prefix='/mohrs/',  # comment out this line to run locally. Keep for deploying on server.
+    requests_pathname_prefix='/mohrs25/',  # comment out this line to run locally. Keep for deploying on server.
     external_stylesheets=external_stylesheets,
     suppress_callback_exceptions=True #because of the tabs, not all callbacks are accessible so we suppress callback exceptions
 )
@@ -437,4 +437,4 @@ def update_graph(circle_checkbox, coulomb_checkbox, s1, s3, theta, s_o, mu, ):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True, host='0.0.0.0', port=8050)
+    app.run(debug=True, host='0.0.0.0', port=8050)

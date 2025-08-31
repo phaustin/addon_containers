@@ -1,23 +1,21 @@
-version: '3.7'
-
 services:
 
   mohrs:
     build:
       context: mohrs
       dockerfile: Dockerfile
-    image: phaustin/mohrs:2025
+    image: phaustin/mohrs25:2025
     labels:
       - traefik.enable=true
-      - traefik.http.routers.mohrs.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/mohrs`)
+      - traefik.http.routers.mohrs.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/mohrs25`)
       - traefik.http.routers.mohrs.tls=true
       - traefik.http.routers.mohrs.tls.certresolver=lets-encrypt
       - traefik.http.routers.mohrs.service=mohrs
       - traefik.http.services.mohrs.loadbalancer.server.port=8050
       - traefik.http.routers.mohrs.middlewares=mohrs-stripprefix
       - traefik.http.middlewares.mohrs-stripprefix.stripprefix.forceSlash=true
-      - traefik.http.middlewares.mohrs-stripprefix.stripprefix.prefixes=/mohrs
-    container_name: mohrs
+      - traefik.http.middlewares.mohrs-stripprefix.stripprefix.prefixes=/mohrs25
+    container_name: mohrs25
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:

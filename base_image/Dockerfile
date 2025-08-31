@@ -7,7 +7,10 @@
 # Date:   Wed Jul 30 21:08:20 2025 -0700
 #     Update ubuntu to 24.04 (#617)
 #     * Update ubuntu to 24.04
-#     * Rename /home/ubuntu to /home/jovyan 
+#     * Rename /home/ubuntu to /home/jovyan
+#
+# change to from default arm64 ubuntu to amd64 for dashboard
+#
 FROM amd64/ubuntu:24.04
 
 LABEL org.opencontainers.image.source=https://github.com/pangeo-data/pangeo-docker-images
