@@ -28,8 +28,9 @@
 ## debugging
 
 1. If you are getting a python error about a missing dictionary key, make sure you are typing `docker compose` not `docker-compose`
-2. The routing endpoint `ocgy` has to exactly match in three different places: line 12 and line 19 in docker-compose-ocgy.yml and
-   line 39 in ocgy-dataviewer/dashdir/app.py
+2. The routing endpoint `ocgy` has to exactly match in three different places: line 12 and line 19 in `docker-compose-ocgy.yml` and
+   line 39 in `ocgy-dataviewer/dashdir/app.py`
+3. The line defining `requests_pathname_prefix='/ocgy/'` in `ocgy-dataviewer/dashdir/app.py` has to be uncommented
 
 ## useful docker commands
 
