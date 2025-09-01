@@ -2,12 +2,12 @@
 
 1. ssh into dashboard as user jovyan
 0. Make sure that the ocese_trafik container defined in `~/repos/ocese_traefik` is running:
-   i. `traefik:v2.5` should be a running process listed by the command 
-    `docker ps`
-   ii. The `proxy_aug07` local network should be listed by the command 
-   `docker network list`
-   iii. visiting the url https://dashboard.eoas.ubc.ca/traefik should show the traefik dashboard after you provide the userid and password
-   iv. vising the url https://dashboard.eoas.ubc.ca/test should run https://hub.docker.com/r/traefik/whoami
+   - `traefik:v2.5` should be a running process listed by the command 
+     `docker ps`
+    - The `proxy_aug07` local network should be listed by the command 
+    `docker network list`
+    - visiting the url https://dashboard.eoas.ubc.ca/traefik should show the traefik dashboard after you provide the userid and password
+   - visiting the url https://dashboard.eoas.ubc.ca/test should run https://hub.docker.com/r/traefik/whoami
 
 2. `cd ~/repos/addon_containers`
 3. git fetch and update dev25 branch
