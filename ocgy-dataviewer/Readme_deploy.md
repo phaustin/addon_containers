@@ -13,14 +13,17 @@
 3. git fetch and update dev25 branch
    - `git checkout dev25`
    - `git fetch origin`
-   - `git reset --hard origin/dev25` 
-4. `docker compose -f docker-compose-ocgy.yml build`
-    will rebuild  container `phaustin/ocgy25:2025`
+   - `git rebase origin/dev25` 
+4. run 
+    `docker compose -f docker-compose-ocgy.yml build`
+    to rebuild the image named `phaustin/ocgy25:2025`
     Your changes will not make it into the container without a rebuild
-5. `docker compose -f docker-compose-ocgy.yml down ocgy25`
-   -- bring down the old ocgy container
-6. `docker compose -f docker-compose-ocgy.yml up -d`  
-   -- bring up the modified ocgy container in detached mode
+5. run
+    `docker compose -f docker-compose-ocgy.yml down ocgy25`
+   to bring down the old ocgy container
+6. run
+   `docker compose -f docker-compose-ocgy.yml up -d`  
+   to bring up the modified ocgy container in detached mode
 
 ## debugging
 
