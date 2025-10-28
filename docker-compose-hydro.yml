@@ -1,0 +1,28 @@
+services:
+
+  ocgy25:
+    build:
+      context: hydro-storativity
+      dockerfile: Dockerfile
+    image: phaustin/hydro25:2025
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.hydro25.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/store`)
+      - traefik.http.routers.hydro25.tls=true
+      - traefik.http.routers.hydro25.tls.certresolver=lets-encrypt
+      - traefik.http.routers.hydro25.service=hydro25
+      - traefik.http.services.hydro25.loadbalancer.server.port=8050
+      - traefik.http.routers.hydro25.middlewares=hydro25-stripprefix
+      - traefik.http.middlewares.hydro25-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.hydro25-stripprefix.stripprefix.prefixes=/store
+    container_name: hydro25
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+
+networks:
+  proxy_aug07:
+    external: true

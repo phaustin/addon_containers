@@ -18,7 +18,7 @@ external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 server = Flask(__name__)
 app = dash.Dash(
     server=server,
-    requests_pathname_prefix='/store/',
+    requests_pathname_prefix='/store/', # comment out this line to run locally. Keep for deploying on server.
     external_stylesheets=external_stylesheets)
 
 # read in csv files containing the values displayed in the table.
@@ -323,4 +323,4 @@ def update_plot(
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True, host="0.0.0.0", port=8050)
+    app.run(debug=True, host="0.0.0.0", port=8050)
