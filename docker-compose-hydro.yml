@@ -1,6 +1,6 @@
 services:
 
-  ocgy25:
+  hydro25:
     build:
       context: hydro-storativity
       dockerfile: Dockerfile
