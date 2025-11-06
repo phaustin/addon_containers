@@ -1,0 +1,28 @@
+services:
+
+  ocgy25:
+    build:
+      context: hydro-ucflow
+      dockerfile: Dockerfile
+    image: phaustin/ucflow25:2025
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ucflow25.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/hydro`)
+      - traefik.http.routers.ucflow25.tls=true
+      - traefik.http.routers.ucflow25.tls.certresolver=lets-encrypt
+      - traefik.http.routers.ucflow25.service=ucflow25
+      - traefik.http.services.ucflow25.loadbalancer.server.port=8050
+      - traefik.http.routers.ucflow25.middlewares=ucflow25-stripprefix
+      - traefik.http.middlewares.ucflow25-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.ucflow25-stripprefix.stripprefix.prefixes=/hydro
+    container_name: ucflow25
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+
+networks:
+  proxy_aug07:
+    external: true

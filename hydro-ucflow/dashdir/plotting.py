@@ -68,15 +68,13 @@ def initialize_elevation_plot(h1, h2, K, W, L, arrow_visibility):
     elevation_plot.update_yaxes(showgrid=False, zeroline=False)
     # this hrect adds a white box to extend the legend area, to hide an issue with the background image
     elevation_plot.add_hrect(
-        xref="paper",
-        yref="paper",
-        x0=1,
-        x1=1.5,
-        y0=-15,
-        y1=100,
-        line_width=0,
-        fillcolor="white",
-        opacity=1,
+         x0=1,
+         x1=1.5,
+         y0=-15,
+         y1=100,
+         line_width=0,
+         fillcolor="white",
+         opacity=1,
     )
 
     # calculating the values to plot, using the calculations file.
@@ -153,8 +151,6 @@ def initialize_elevation_plot(h1, h2, K, W, L, arrow_visibility):
         + "m</b>"
     )
     elevation_plot.add_annotation(
-        xref="paper",
-        yref="paper",
         x=1,
         y=0,
         text=text,
