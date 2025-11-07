@@ -4,13 +4,11 @@ channels:
   - conda-forge
 dependencies:
   - dash
-  - dash-html-components
-  - pip
   - plotly
-  - python
+  - python > 3.11
   - gunicorn
   - flask
   - pandas
   - scikit-image
   - conda-lock
-# conda-lock -f environment.yml -p linux-64 -p osx-arm64
+# conda-lock -f environment.yml -p linux-64

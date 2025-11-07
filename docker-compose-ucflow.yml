@@ -1,10 +1,10 @@
 services:
-  
-  ucflow25:
+
+  ucflow25b:
     build:
       context: hydro-ucflow
       dockerfile: Dockerfile
-    image: phaustin/ucflow25:2025
+    image: phaustin/ucflow25:2025b
     labels:
       - traefik.enable=true
       - traefik.http.routers.ucflow25.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/hydro`)
@@ -15,7 +15,7 @@ services:
       - traefik.http.routers.ucflow25.middlewares=ucflow25-stripprefix
       - traefik.http.middlewares.ucflow25-stripprefix.stripprefix.forceSlash=true
       - traefik.http.middlewares.ucflow25-stripprefix.stripprefix.prefixes=/hydro
-    container_name: ucflow25
+    container_name: ucflow25b
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
