@@ -1,6 +1,6 @@
 services:
-
-  ocgy25:
+  
+  ucflow25:
     build:
       context: hydro-ucflow
       dockerfile: Dockerfile
