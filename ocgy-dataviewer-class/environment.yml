@@ -1,0 +1,17 @@
+name: notebook
+channels:
+  - eoas_ubc
+  - conda-forge
+dependencies:
+  - dash
+  - dash-html-components
+  - python
+  - gunicorn
+  - flask
+  - pip
+  - pandas
+  - plotly
+  - numpy
+  - gsw
+  
+# conda-lock -f environment.yml -p linux-64

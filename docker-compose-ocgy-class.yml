@@ -1,0 +1,28 @@
+services:
+
+  ocgy-class25:
+    build:
+      context: ocgy-dataviewer-class
+      dockerfile: Dockerfile
+    image: phaustin/ocgy-class25:2025
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.ocgy-class25.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/ocgy-class`)
+      - traefik.http.routers.ocgy-class25.tls=true
+      - traefik.http.routers.ocgy-class25.tls.certresolver=lets-encrypt
+      - traefik.http.routers.ocgy-class25.service=ocgy-class25
+      - traefik.http.services.ocgy-class25.loadbalancer.server.port=8050
+      - traefik.http.routers.ocgy-class25.middlewares=ocgy-class25-stripprefix
+      - traefik.http.middlewares.ocgy-class25-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.ocgy-class25-stripprefix.stripprefix.prefixes=/ocgy-class
+    container_name: ocgy-class25
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
+
+networks:
+  proxy_aug07:
+    external: true
