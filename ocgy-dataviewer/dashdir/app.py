@@ -125,7 +125,7 @@ app.layout = html.Div(
                     },
                     value=[-500, 0],
                     vertical=True,
-                    verticalHeight=360,
+                    verticalHeight=400,
                 )
             ],
             style={
@@ -139,6 +139,7 @@ app.layout = html.Div(
                 # the graph of subplots which show depth profiles for different parameters
                 dcc.Graph(
                     id="profiles",
+                    style={"height":"500px"},
                     config={
                         "staticPlot": False,  # True, False
                         "scrollZoom": True,  # True, False

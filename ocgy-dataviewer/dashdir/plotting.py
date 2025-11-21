@@ -143,12 +143,12 @@ def initialize_profiles(y_range):
     figR = px.scatter(x=[None], y=[None])
     
     #Adds lines between the markers.
-   # figT.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
-   # figS.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
-   # figD.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
-   # figN.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
-   # figI.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
-   # figR.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+    figT.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+    figS.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+    figD.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+    figN.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+    figI.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+    figR.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
 
     fig.add_trace(figT.data[0], row=1, col=1)
     fig.add_trace(figS.data[0], row=1, col=2)
@@ -167,12 +167,12 @@ def initialize_profiles(y_range):
         figR = px.scatter(x=[None], y=[None])
 
         #Adds lines between the markers.
-        #figT.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
-        #figS.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
-        #figD.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
-        #figN.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
-        #figI.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
-        #figR.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+        figT.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+        figS.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+        figD.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+        figN.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+        figI.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
+        figR.update_traces(mode='lines + markers', connectgaps=True, line_shape='spline')
     
         fig.add_trace(figT.data[0], row=1, col=1)
         fig.add_trace(figS.data[0], row=1, col=2)
@@ -205,12 +205,12 @@ def initialize_profiles(y_range):
     fig = update_x_range(fig)
     
     #initial fixed x axes
-    #fig.update_xaxes(title_text="<b>Temperature</b><br>(\u00BAC)", range = (-3,29), nticks = 3, row=1, col=1)
-    #fig.update_xaxes(title_text="<b>Salinity</b><br>(Practical Salinity)", range = (30,38), nticks = 3, row=1, col=2)
-    #fig.update_xaxes(title_text="<b>Sigma0*</b><br>(kg/m\u00B3)", range = (22,29), nticks = 3, row=1, col=3)  # unicode for the m^3
-    #fig.update_xaxes(title_text="<b>Nitrate</b><br>(\u03BCmol/kg)", range = (-1,45), nticks = 3, row=1, col=4)
-    #fig.update_xaxes(title_text="<b>Iron</b><br>(nmol/kg)", range = (-0.1,2), nticks = 3, row=1, col=5)
-    #fig.update_xaxes(title_text="<b>Nitrate/Iron**</b><br>(\u03BCmol/nmol)", range = (-5,625), nticks = 3, row=1, col=6)
+    fig.update_xaxes(title_text="<b>Temperature</b><br>(\u00BAC)", range = (-3,29), nticks = 3, row=1, col=1)
+    fig.update_xaxes(title_text="<b>Salinity</b><br>(Practical Salinity)", range = (30,38), nticks = 3, row=1, col=2)
+    fig.update_xaxes(title_text="<b>Sigma0*</b><br>(kg/m\u00B3)", range = (22,29), nticks = 3, row=1, col=3)  # unicode for the m^3
+    fig.update_xaxes(title_text="<b>Nitrate</b><br>(\u03BCmol/kg)", range = (-1,45), nticks = 3, row=1, col=4)
+    fig.update_xaxes(title_text="<b>Iron</b><br>(nmol/kg)", range = (-0.1,2), nticks = 3, row=1, col=5)
+    fig.update_xaxes(title_text="<b>Nitrate/Iron**</b><br>(\u03BCmol/nmol)", range = (-5,625), nticks = 3, row=1, col=6)
 
     fig.update_layout(template  = "simple_white")
 
