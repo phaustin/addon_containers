@@ -2,7 +2,7 @@ services:
 
   globaltemps25:
     build:
-      context: globaltemps
+      context: globaltemps-factors
       dockerfile: Dockerfile
     image: phaustin/globaltemps25:2025
     labels:
