@@ -2,7 +2,7 @@ services:
 
   globaltemps25:
     build:
-      context: globaltemps-factors
+      context: globaltemp-factors
       dockerfile: Dockerfile
     image: phaustin/globaltemps25:2025
     labels:
@@ -21,6 +21,7 @@ services:
     networks:
       - proxy_aug07
     working_dir: /home/jovyan/dashdir
+    entrypoint: []
     command: gunicorn --workers=10 --threads=2 -b 0.0.0.0:8050 app:server
 
 networks:
