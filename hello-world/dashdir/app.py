@@ -10,7 +10,7 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 server = Flask(__name__)
 app = dash.Dash(__name__,server=server,
-                requests_pathname_prefix='/hello25/',
+                requests_pathname_prefix='/hello/',
                 external_stylesheets=external_stylesheets)
 
 # get the data

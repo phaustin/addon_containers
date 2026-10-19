@@ -2,22 +2,21 @@ version: '3.7'
 
 services:
 
-  hello_world:
+  hello_world_debug:
     build:
       context: hello-world
       dockerfile: Dockerfile
-    image: phaustin/hello_world:2025
+    image: phaustin/hello_world_debug:2025
     labels:
       - traefik.enable=true
-      - traefik.http.routers.hello_world.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/hello25`)
-      - traefik.http.routers.hello_world.tls=true
-      - traefik.http.routers.hello_world.tls.certresolver=lets-encrypt
-      - traefik.http.routers.hello_world.service=hello_world
-      - traefik.http.services.hello_world.loadbalancer.server.port=8050
-      - traefik.http.routers.hello_world.middlewares=hello_world-stripprefix
-      - traefik.http.middlewares.hello_world-stripprefix.stripprefix.forceSlash=true
-      - traefik.http.middlewares.hello_world-stripprefix.stripprefix.prefixes=/hello25
-    container_name: hello_world
+      - traefik.http.routers.hello_world_debug.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/hello25`)
+      - traefik.http.routers.hello_world_debug.tls=true
+      - traefik.http.routers.hello_world_debug.service=hello_world_debug
+      - traefik.http.services.hello_world_debug.loadbalancer.server.port=8050
+      - traefik.http.routers.hello_world_debug.middlewares=hello_world_debug-stripprefix
+      - traefik.http.middlewares.hello_world_debug-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.hello_world_debug-stripprefix.stripprefix.prefixes=/hello25
+    container_name: hello_world_debug
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
