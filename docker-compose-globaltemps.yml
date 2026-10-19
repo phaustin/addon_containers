@@ -7,15 +7,15 @@ services:
     image: phaustin/globaltemps25:2025
     labels:
       - traefik.enable=true
-      - traefik.http.routers.globaltemps25.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/globaltemps`)
+      - traefik.http.routers.globaltemps25.rule=Host(`dashboard.eoas.ubc.ca`) && (Path(`/globaltemps`) || PathPrefix(`/globaltemps/`))
       - traefik.http.routers.globaltemps25.tls=true
-      - traefik.http.routers.globaltemps25.tls.certresolver=lets-encrypt
       - traefik.http.routers.globaltemps25.service=globaltemps25
       - traefik.http.services.globaltemps25.loadbalancer.server.port=8050
       - traefik.http.routers.globaltemps25.middlewares=globaltemps25-stripprefix
       - traefik.http.middlewares.globaltemps25-stripprefix.stripprefix.forceSlash=true
       - traefik.http.middlewares.globaltemps25-stripprefix.stripprefix.prefixes=/globaltemps
     container_name: globaltemps25
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:

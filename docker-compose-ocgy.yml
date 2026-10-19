@@ -7,15 +7,15 @@ services:
     image: phaustin/ocgy25:2025
     labels:
       - traefik.enable=true
-      - traefik.http.routers.ocgy25.rule=Host(`dashboard.eoas.ubc.ca`) && PathPrefix(`/ocgy`)
+      - traefik.http.routers.ocgy25.rule=Host(`dashboard.eoas.ubc.ca`) && (Path(`/ocgy`) || PathPrefix(`/ocgy/`))
       - traefik.http.routers.ocgy25.tls=true
-      - traefik.http.routers.ocgy25.tls.certresolver=lets-encrypt
       - traefik.http.routers.ocgy25.service=ocgy25
       - traefik.http.services.ocgy25.loadbalancer.server.port=8050
       - traefik.http.routers.ocgy25.middlewares=ocgy25-stripprefix
       - traefik.http.middlewares.ocgy25-stripprefix.stripprefix.forceSlash=true
       - traefik.http.middlewares.ocgy25-stripprefix.stripprefix.prefixes=/ocgy
     container_name: ocgy25
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
