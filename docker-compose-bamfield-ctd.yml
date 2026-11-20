@@ -1,0 +1,33 @@
+name: bamfield-ctd
+
+services:
+
+  bamfield-ctd:
+    build:
+      context: bamfield-ctd
+      dockerfile: Dockerfile
+    image: phaustin/bamfield-ctd:2026
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.bamfield-ctd.rule=Host(`dashboard.eoas.ubc.ca`) && (Path(`/bamfield-ctd`) || PathPrefix(`/bamfield-ctd/`))
+      - traefik.http.routers.bamfield-ctd.tls=true
+      - traefik.http.routers.bamfield-ctd.service=bamfield-ctd
+      - traefik.http.services.bamfield-ctd.loadbalancer.server.port=8050
+      - traefik.http.routers.bamfield-ctd.middlewares=bamfield-ctd-stripprefix
+      - traefik.http.middlewares.bamfield-ctd-stripprefix.stripprefix.forceSlash=true
+      - traefik.http.middlewares.bamfield-ctd-stripprefix.stripprefix.prefixes=/bamfield-ctd
+    container_name: bamfield-ctd
+    restart: unless-stopped
+    environment:
+      # Dash reads this, so app.py needs no edit for the proxy path. It must match the
+      # PathPrefix and stripprefix above.
+      - DASH_REQUESTS_PATHNAME_PREFIX=/bamfield-ctd/
+    networks:
+      - proxy_aug07
+    working_dir: /home/jovyan/dashdir
+    # ~180 MB per worker (each holds the profiles in memory); 3 is ample for a class.
+    command: gunicorn --workers=3 --threads=2 -b 0.0.0.0:8050 app:server
+
+networks:
+  proxy_aug07:
+    external: true

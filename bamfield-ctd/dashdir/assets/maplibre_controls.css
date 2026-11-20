@@ -1,0 +1,19 @@
+/* Plotly's map traces render with MapLibre, but MapLibre's stylesheet is not on the page, so its
+   controls fall out of the map as ordinary text below it (and overlap whatever follows).
+   These rules restore just the corner positioning and the OpenStreetMap credit box. */
+#map .maplibregl-map { position: relative; overflow: hidden; }
+#map .maplibregl-ctrl-top-left,
+#map .maplibregl-ctrl-top-right,
+#map .maplibregl-ctrl-bottom-left,
+#map .maplibregl-ctrl-bottom-right { position: absolute; pointer-events: none; z-index: 2; }
+#map .maplibregl-ctrl-top-left { top: 0; left: 0; }
+#map .maplibregl-ctrl-top-right { top: 0; right: 0; }
+#map .maplibregl-ctrl-bottom-left { bottom: 0; left: 0; }
+#map .maplibregl-ctrl-bottom-right { bottom: 0; right: 0; }
+#map .maplibregl-ctrl { pointer-events: auto; }
+#map .maplibregl-ctrl-attrib {
+  background: rgba(255, 255, 255, 0.75); padding: 0 5px; margin: 0;
+  font: 11px/18px Helvetica, Arial, sans-serif;
+}
+#map .maplibregl-ctrl-attrib-button { display: none; }
+#map .maplibregl-ctrl-attrib a { color: rgba(0, 0, 0, 0.75); text-decoration: none; }

@@ -1,0 +1,12 @@
+name: notebook
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.12
+  - dash>=3.2      # allow_duplicate outputs, clientside callbacks, dcc.Store sessions
+  - plotly>=6.3    # go.Scattermap (MapLibre)
+  - pandas>=2.2
+  - numpy
+  - gsw            # TEOS-10 conversion of uploaded casts
+  - flask
+  - gunicorn
