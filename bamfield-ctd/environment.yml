@@ -1,12 +1,15 @@
 name: notebook
 channels:
   - conda-forge
+# Pinned to the versions first deployed and tested (20 Nov 2026), so a rebuild cannot jump a
+# major version. To upgrade: change these, rebuild locally in the ctd_dashboard env with the
+# same pins, test, then rebuild here.
 dependencies:
-  - python>=3.12
-  - dash>=3.2      # allow_duplicate outputs, clientside callbacks, dcc.Store sessions
-  - plotly>=6.3    # go.Scattermap (MapLibre)
-  - pandas>=2.2
-  - numpy
-  - gsw            # TEOS-10 conversion of uploaded casts
-  - flask
-  - gunicorn
+  - python=3.15.2
+  - dash=4.5.1
+  - plotly=7.1.0
+  - pandas=3.1.1
+  - numpy=2.5.5
+  - gsw=3.6.23
+  - flask=3.1.3
+  - gunicorn=27.0.1
