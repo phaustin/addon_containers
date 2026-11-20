@@ -11,7 +11,8 @@ case-sensitive:
     date                  YYYY-MM-DD (optional)
     depth_m               bin depth in metres (required)
     temperature_c         in-situ temperature, ITS-90 (required)
-    salinity              practical salinity (required)
+    practical_salinity    Practical Salinity (PSS-78), as the CTD reports it, not Absolute
+                          Salinity (required; a column named `salinity` is read the same way)
     oxygen_umol_l         dissolved oxygen in umol/L; from ml/L multiply by 44.66 (optional)
     fluorescence, par     optional, any units
 
@@ -37,20 +38,23 @@ LAT_LIM, LON_LIM = (48.0, 50.0), (-127.0, -123.0)   # generous: anywhere near Ba
 UPLOAD_PREFIX = "__upload__"     # profile ids of uploaded casts: __upload__0, __upload__1, ...
 
 COLUMNS = {   # template column -> name used inside the dashboard
-    "depth_m": "z", "temperature_c": "TempCT", "salinity": "Salinity",
+    "depth_m": "z", "temperature_c": "TempCT", "practical_salinity": "Salinity",
     "oxygen_umol_l": "DO", "fluorescence": "Fluorescence", "par": "PAR",
 }
-REQUIRED = ["latitude", "longitude", "depth_m", "temperature_c", "salinity"]
+REQUIRED = ["latitude", "longitude", "depth_m", "temperature_c", "practical_salinity"]
+# Older column names still accepted (the template said `salinity` until 20 Nov 2026).
+ALIASES = {"salinity": "practical_salinity"}
 TEMPLATE_COLUMNS = ["cast", "latitude", "longitude", "date", *COLUMNS]
 
 
 def template_csv() -> str:
     """The template, with two short example casts to show the layout."""
-    rows = [["Sarita Hole", 48.8975, -125.0501, "2027-02-18", 1.0, 8.61, 30.12, 281.0, "", ""],
-            ["", "", "", "", 1.5, 8.60, 30.15, 280.4, "", ""],
-            ["", "", "", "", 2.0, 8.58, 30.31, 279.9, "", ""],
-            ["Aguilar Point", 48.8403, -125.1407, "2027-02-19", 1.0, 8.20, 29.80, 290.2, "", ""],
-            ["", "", "", "", 1.5, 8.22, 29.95, 289.7, "", ""]]
+    # Starts at 1.5 m: rows at 1 m and shallower are dropped (SURFACE_CUT_M).
+    rows = [["Sarita Hole", 48.8975, -125.0501, "2027-02-18", 1.5, 8.61, 30.12, 281.0, "", ""],
+            ["", "", "", "", 2.0, 8.60, 30.15, 280.4, "", ""],
+            ["", "", "", "", 2.5, 8.58, 30.31, 279.9, "", ""],
+            ["Aguilar Point", 48.8403, -125.1407, "2027-02-19", 1.5, 8.20, 29.80, 290.2, "", ""],
+            ["", "", "", "", 2.0, 8.22, 29.95, 289.7, "", ""]]
     return pd.DataFrame(rows, columns=TEMPLATE_COLUMNS).to_csv(index=False)
 
 
@@ -103,6 +107,7 @@ def read_upload(contents: str, filename: str) -> list[dict]:
     except Exception as err:                                     # noqa: BLE001
         raise ValueError(f"Could not read the file as CSV ({err}).") from None
     df.columns = [str(c).strip().lower() for c in df.columns]
+    df = df.rename(columns={old: new for old, new in ALIASES.items() if new not in df})
     missing = [c for c in REQUIRED if c not in df]
     if missing:
         raise ValueError("Missing column(s): " + ", ".join(missing)

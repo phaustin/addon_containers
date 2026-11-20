@@ -46,7 +46,13 @@ app.layout = html.Div([
             "row; several casts at one site are fine. Each cast is drawn in its own warm colour "
             "at its nearest site, alongside that site's casts and usual range. Rows at 1 m and "
             "shallower are left out, as they are for the archive (the surface soak). The file stays in "
-            "your browser: nothing is stored on the server.",
+            "your browser: nothing is stored on the server.\n\n"
+            "**Units.** `depth_m` in metres; `temperature_c` is in-situ temperature in °C, and "
+            "`practical_salinity` is Practical Salinity (no units), both as the CTD reports them. "
+            "Do not convert them: the dashboard converts them to Conservative Temperature and "
+            "Absolute Salinity (TEOS-10) itself, as it does for the archive. Optional: "
+            "`oxygen_umol_l` in µmol L⁻¹ (from ml L⁻¹, multiply by 44.66), and `fluorescence` "
+            "and `par` in any units.",
             style={"fontSize": "13px"}),
         html.Div([
             html.Button("Download the template", id="template_button"),
